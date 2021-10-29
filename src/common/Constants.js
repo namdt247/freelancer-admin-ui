@@ -7,6 +7,7 @@ const Constants = {
         KEY_FIRST_USE: 'KEY_FIRST_USE',
         KEY_USER_NAME: 'userName',
         KEY_USER_NAME_2: 'userName2',
+        KEY_USER_ID: 'userId',
     },
     MARGIN_HOZ: 24,
     TABBAR_HEIGHT: 80,

@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import {Routes} from "./common/Routes";
 import HomePage from "./pages/HomePage";
 import MainReport from "./pages/report-statistic/MainReport";
+import ListUserAdmin from "./pages/admin/ListUserAdmin";
 
 export default () => (
     <Router>
@@ -15,7 +16,7 @@ export default () => (
             <Route exact path={Routes.Dashboard.path} component={Dashboard} />
 
             {/* account */}
-            <Route exact path={Routes.ListAccount.path} component={Dashboard} />
+            <Route exact path={Routes.ListAccount.path} component={ListUserAdmin} />
 
             {/* freelancer */}
             <Route exact path={Routes.ListFreelancer.path} component={Dashboard} />

@@ -11,10 +11,12 @@ function* loginSubmit({params}) {
         ModelManager.setToken(response.data?.credential?.accessToken).then(
             ModelManager.setUserName(response.data?.account?.username || '').then(
                 ModelManager.setUserName2(response.data?.account?.email || '').then(
-                    yield put({
-                        type: loginActionType.LOGIN_SUCCESS,
-                        status: response.statusCode,
-                    }),
+                    ModelManager.setUserId(response.data?.account?.id || '').then(
+                        yield put({
+                            type: loginActionType.LOGIN_SUCCESS,
+                            status: response.statusCode,
+                        }),
+                    ),
                 ),
             ),
         );

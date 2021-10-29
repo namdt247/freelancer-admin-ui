@@ -27,24 +27,28 @@ export const accountAction = {
             params,
         };
     },
-    addAccount: () => {
+    addAccount: (params) => {
         return {
             type: accountActionType.ADD_ACCOUNT,
+            params
         };
     },
-    detailAccount: () => {
+    detailAccount: (params) => {
         return {
             type: accountActionType.DETAIL_ACCOUNT,
+            params,
         };
     },
-    updateAccount: () => {
+    updateAccount: (params) => {
         return {
             type: accountActionType.UPDATE_ACCOUNT,
+            params,
         };
     },
-    deleteAccount: () => {
+    deleteAccount: (params) => {
         return {
             type: accountActionType.DELETE_ACCOUNT,
+            params,
         };
     },
 };
@@ -56,24 +60,28 @@ export const freelancerAction = {
             params,
         };
     },
-    addFreelancer: () => {
+    addFreelancer: (params) => {
         return {
             type: freelancerActionType.ADD_FREELANCER,
+            params,
         };
     },
-    detailFreelancer: () => {
+    detailFreelancer: (params) => {
         return {
             type: freelancerActionType.DETAIL_FREELANCER,
+            params,
         };
     },
-    updateFreelancer: () => {
+    updateFreelancer: (params) => {
         return {
             type: freelancerActionType.UPDATE_FREELANCER,
+            params,
         };
     },
-    deleteFreelancer: () => {
+    deleteFreelancer: (params) => {
         return {
             type: freelancerActionType.DELETE_FREELANCER,
+            params,
         };
     },
 };
@@ -85,24 +93,28 @@ export const jobAction = {
             params,
         };
     },
-    addJob: () => {
+    addJob: (params) => {
         return {
             type: jobActionType.ADD_JOB,
+            params,
         };
     },
-    detailJob: () => {
+    detailJob: (params) => {
         return {
             type: jobActionType.DELETE_JOB,
+            params,
         };
     },
-    updateJob: () => {
+    updateJob: (params) => {
         return {
             type: jobActionType.UPDATE_JOB,
+            params,
         };
     },
-    deleteJob: () => {
+    deleteJob: (params) => {
         return {
             type: jobActionType.DELETE_JOB,
+            params,
         };
     },
 };

@@ -4,11 +4,13 @@ class ModelManager {
     static token = '';
     static userName = '';
     static userName2 = '';
+    static userId = '';
 
     constructor() {
         this.token = localStorage.getItem(Constants.StorageKey.KEY_TOKEN);
         this.userName = localStorage.getItem(Constants.StorageKey.KEY_USER_NAME);
         this.userName2 = localStorage.getItem(Constants.StorageKey.KEY_USER_NAME_2);
+        this.userId = localStorage.getItem(Constants.StorageKey.KEY_USER_ID);
     }
 
     setToken = async (token) => {
@@ -38,6 +40,15 @@ class ModelManager {
         }
     };
 
+    setUserId = async (userId) => {
+        try {
+            this.userId = userId;
+            await localStorage.setItem(Constants.StorageKey.KEY_USER_ID, userId);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     checkAuth() {
         let token = (localStorage.getItem(Constants.StorageKey.KEY_TOKEN) || 'null');
         return !token || token !== 'null';
@@ -47,6 +58,7 @@ class ModelManager {
         localStorage.removeItem(Constants.StorageKey.KEY_TOKEN);
         localStorage.removeItem(Constants.StorageKey.KEY_USER_NAME);
         localStorage.removeItem(Constants.StorageKey.KEY_USER_NAME_2);
+        localStorage.removeItem(Constants.StorageKey.KEY_USER_ID);
         this.setToken(null);
     }
 }
