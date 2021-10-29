@@ -7,6 +7,7 @@ import {Routes} from "./common/Routes";
 import HomePage from "./pages/HomePage";
 import MainReport from "./pages/report-statistic/MainReport";
 import ListUserAdmin from "./pages/admin/ListUserAdmin";
+import ListFreelancerAdmin from "./pages/admin/ListFreelancerAdmin";
 
 export default () => (
     <Router>
@@ -19,7 +20,7 @@ export default () => (
             <Route exact path={Routes.ListAccount.path} component={ListUserAdmin} />
 
             {/* freelancer */}
-            <Route exact path={Routes.ListFreelancer.path} component={Dashboard} />
+            <Route exact path={Routes.ListFreelancer.path} component={ListFreelancerAdmin} />
 
             {/* job */}
             <Route exact path={Routes.ListJob.path} component={Dashboard} />

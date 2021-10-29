@@ -13,7 +13,7 @@ export const Routes = {
     ListAccount: { path: '/user-management' },
 
     // freelancer
-    ListFreelancer: { path: '/user-management' },
+    ListFreelancer: { path: '/freelancer-management' },
 
     // job
     ListJob: { path: '/job-management' },
