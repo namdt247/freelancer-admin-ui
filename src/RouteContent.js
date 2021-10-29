@@ -16,7 +16,7 @@ export default () => (
             <Route exact path={Routes.Dashboard.path} component={Dashboard} />
 
             {/* account */}
-            <Route exact path={Routes.ListAccount.path} component={ListUserAdmin} />
+            <Route exact path={Routes.ListAccountAdmin.path} component={ListUserAdmin} />
 
             {/* freelancer */}
             <Route exact path={Routes.ListFreelancer.path} component={Dashboard} />

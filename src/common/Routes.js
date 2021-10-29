@@ -10,7 +10,7 @@ export const Routes = {
     ServerError: { path: "/examples/500" },
 
     // account
-    ListAccount: { path: '/user-management' },
+    ListAccountAdmin: { path: '/user-management' },
 
     // freelancer
     ListFreelancer: { path: '/user-management' },
