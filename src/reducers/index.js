@@ -4,6 +4,7 @@ import freelancerReducer from "./freelancerReducer";
 import jobReducer from "./jobReducer";
 import transactionReducer from "./transactionReducer";
 import loginReducer from "./loginReducer";
+import statisticReducer from "./statisticReducer";
 
 const allReducers = combineReducers({
     accountReducer,
@@ -11,6 +12,7 @@ const allReducers = combineReducers({
     jobReducer,
     transactionReducer,
     loginReducer,
+    statisticReducer,
 });
 
 export default allReducers;

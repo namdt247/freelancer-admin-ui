@@ -2,7 +2,7 @@ import {
     accountActionType,
     freelancerActionType,
     jobActionType,
-    loginActionType,
+    loginActionType, statisticActionType,
     transactionActionType
 } from './actionTypes';
 
@@ -101,7 +101,7 @@ export const jobAction = {
     },
     detailJob: (params) => {
         return {
-            type: jobActionType.DELETE_JOB,
+            type: jobActionType.DETAIL_JOB,
             params,
         };
     },
@@ -123,6 +123,15 @@ export const transactionAction = {
     getLisTransaction: (params) => {
         return {
             type: transactionActionType.GET_LIST_TRANSACTION,
+            params,
+        };
+    },
+};
+
+export const statisticAction = {
+    statisticAccount: (params) => {
+        return {
+            type: statisticActionType.GET_STATISTIC_ACCOUNT,
             params,
         };
     },

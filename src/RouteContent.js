@@ -6,8 +6,11 @@ import NotFound from "./pages/NotFound";
 import {Routes} from "./common/Routes";
 import HomePage from "./pages/HomePage";
 import MainReport from "./pages/report-statistic/MainReport";
-import ListUserAdmin from "./pages/admin/ListUserAdmin";
-import ListFreelancerAdmin from "./pages/admin/ListFreelancerAdmin";
+import ListUserAdmin from "./pages/user-admin/ListUserAdmin";
+import ListFreelancer from "./pages/freelancer/ListFreelancer";
+import ListUserNormal from "./pages/user-normal/ListUserNormal";
+import ListTransaction from "./pages/transaction/ListTransaction";
+import ListJob from "./pages/job/ListJob";
 
 export default () => (
     <Router>
@@ -18,15 +21,16 @@ export default () => (
 
             {/* account */}
             <Route exact path={Routes.ListAccountAdmin.path} component={ListUserAdmin} />
+            <Route exact path={Routes.ListAccountNormal.path} component={ListUserNormal} />
 
             {/* freelancer */}
-            <Route exact path={Routes.ListFreelancer.path} component={ListFreelancerAdmin} />
+            <Route exact path={Routes.ListFreelancer.path} component={ListFreelancer} />
 
             {/* job */}
-            <Route exact path={Routes.ListJob.path} component={Dashboard} />
+            <Route exact path={Routes.ListJob.path} component={ListJob} />
 
             {/* transaction */}
-            <Route exact path={Routes.ListTransaction.path} component={Dashboard} />
+            <Route exact path={Routes.ListTransaction.path} component={ListTransaction} />
 
             {/* report */}
             <Route exact path={Routes.MainReport.path} component={MainReport} />

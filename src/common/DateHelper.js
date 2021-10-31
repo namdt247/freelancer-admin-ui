@@ -1,4 +1,9 @@
 class DateHelper {
+    formatFull() {
+        let strFormat = "DD/MM/YYYY HH:mm:ss";
+        return strFormat;
+    }
+
     formatFullDay() {
         let strFormat = "DD/MM/YYYY";
         return strFormat;

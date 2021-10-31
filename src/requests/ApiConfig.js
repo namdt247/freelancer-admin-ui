@@ -33,4 +33,7 @@ export const APIConfig = {
 
     // transaction
     URL_LIST_TRANSACTION: '/api/admin/transaction',
+
+    // statistic
+    URL_STATISTIC_ACCOUNT: '/api/admin/statistic/account',
 };

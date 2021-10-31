@@ -9,10 +9,10 @@ import {accountAction} from "../../actions";
 import {accountActionType} from "../../actions/actionTypes";
 import {contentMessage, notiMessage} from "../../common/Message";
 import {Routes} from "../../common/Routes";
-import ModalAccountAdmin from "./components/ModalAccountAdmin";
-import TableAccountAdmin from "./components/TableAccountAdmin";
+import ModalAccountNormal from "./components/ModalAccountNormal";
+import TableAccountNormal from "./components/TableAccountNormal";
 
-function ListUserAdmin() {
+function ListUserNormal() {
     const dispatch = useDispatch();
 
     const accountReducer = useSelector((state) => state.accountReducer);
@@ -37,14 +37,14 @@ function ListUserAdmin() {
     let params = {
         'currentPage': currentPage,
         'pageSize': pageSize,
-        'typeUser': 0,
+        'typeUser': 1,
     }
 
     const titlePage = () => {
         return (
             <div className="d-md-flex justify-content-between mb-3">
                 <div>
-                    <h4 className="mb-0">List user admin</h4>
+                    <h4 className="mb-0">User management</h4>
                 </div>
                 <div>
                     <Button type="primary" onClick={handleShowForm} className="mt-md-0 mt-2">
@@ -158,7 +158,7 @@ function ListUserAdmin() {
                         <span>Home</span>
                     </Breadcrumb.Item>
                     <Breadcrumb.Item>
-                        <span>List admin</span>
+                        <span>User management</span>
                     </Breadcrumb.Item>
                 </Breadcrumb>
             </div>
@@ -185,7 +185,7 @@ function ListUserAdmin() {
                     </Col>
                 </Row>
                 <Divider />
-                <TableAccountAdmin
+                <TableAccountNormal
                     loading={loading}
                     data={listUserAdmin}
                     currentPage={currentPage}
@@ -197,7 +197,7 @@ function ListUserAdmin() {
                     setAccountId={setAccountId}
                     handleDelete={handleDelete}
                 />
-                <ModalAccountAdmin
+                <ModalAccountNormal
                     visible={visible}
                     setVisible={setVisible}
                     typeForm={typeForm}
@@ -208,4 +208,4 @@ function ListUserAdmin() {
     );
 };
 
-export default ListUserAdmin;
+export default ListUserNormal;

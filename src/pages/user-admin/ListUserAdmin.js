@@ -5,24 +5,24 @@ import {Breadcrumb, Button, Card, Col, Divider, Input, Row} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHome, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {freelancerAction} from "../../actions";
-import {freelancerActionType} from "../../actions/actionTypes";
+import {accountAction} from "../../actions";
+import {accountActionType} from "../../actions/actionTypes";
 import {contentMessage, notiMessage} from "../../common/Message";
 import {Routes} from "../../common/Routes";
-import ModalFreelancerAdmin from "./components/ModalFreelancerAdmin";
-import TableFreelancerAdmin from "./components/TableFreelancerAdmin";
+import ModalAccountAdmin from "./components/ModalAccountAdmin";
+import TableAccountAdmin from "./components/TableAccountAdmin";
 
-function ListFreelancerAdmin() {
+function ListUserAdmin() {
     const dispatch = useDispatch();
 
-    const freelancerReducer = useSelector((state) => state.freelancerReducer);
+    const accountReducer = useSelector((state) => state.accountReducer);
 
-    const [listFreelancerAdmin, setListFreelancerAdmin] = useState([]);
+    const [listUserAdmin, setListUserAdmin] = useState([]);
 
     // form modal
     const [visible, setVisible] = useState(false);
     const [typeForm, setTypeForm] = useState('add');
-    const [Freelancer, setFreelancer] = useState('');
+    const [accountId, setAccountId] = useState('');
 
     // loading
     const [loading, setLoading] = useState(true);
@@ -37,14 +37,23 @@ function ListFreelancerAdmin() {
     let params = {
         'currentPage': currentPage,
         'pageSize': pageSize,
-        'typeFreelancer': 0,
+        'typeUser': 0,
     }
 
     const titlePage = () => {
         return (
             <div className="d-md-flex justify-content-between mb-3">
                 <div>
-                    <h4 className="mb-0">List Freelancer admin</h4>
+                    <h4 className="mb-0">Admin management</h4>
+                </div>
+                <div>
+                    <Button type="primary" onClick={handleShowForm} className="mt-md-0 mt-2">
+                        <FontAwesomeIcon
+                            icon={faPlus}
+                            className="mr-2"
+                        />
+                        Create
+                    </Button>
                 </div>
             </div>
         )
@@ -59,13 +68,13 @@ function ListFreelancerAdmin() {
             ...params,
             currentPage: 1,
         }
-        dispatch(freelancerAction.getLisFreelancer(paramSearch));
+        dispatch(accountAction.getLisAccount(paramSearch));
     }
 
     const handleShowForm = () => {
         setVisible(true);
         setTypeForm('add');
-        setFreelancer('');
+        setAccountId('');
     }
 
     const handleChangePage = (value) => {
@@ -74,42 +83,42 @@ function ListFreelancerAdmin() {
 
     const handleDelete = (value) => {
         let paramsDelete = {
-            Freelancer: value,
+            accountId: value,
         }
-        dispatch(freelancerAction.deleteFreelancer(paramsDelete));
+        dispatch(accountAction.deleteAccount(paramsDelete));
     }
 
     useEffect(() => {
-        dispatch(freelancerAction.getLisFreelancer(params));
+        dispatch(accountAction.getLisAccount(params));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentPage])
 
     useEffect(() => {
-        if (freelancerReducer.type === freelancerActionType.GET_LIST_FREELANCER) {
+        if (accountReducer.type === accountActionType.GET_LIST_ACCOUNT) {
             setLoading(true);
         }
-        if (freelancerReducer.type === freelancerActionType.GET_LIST_FREELANCER_SUCCESS) {
-            setListFreelancerAdmin(freelancerReducer.data?.list || []);
-            setTotalPage(freelancerReducer.data?.totalPage || 0);
+        if (accountReducer.type === accountActionType.GET_LIST_ACCOUNT_SUCCESS) {
+            setListUserAdmin(accountReducer.data?.list || []);
+            setTotalPage(accountReducer.data?.totalPage || 0);
             setLoading(false);
         }
 
-        if (freelancerReducer.type === freelancerActionType.ADD_FREELANCER_SUCCESS) {
+        if (accountReducer.type === accountActionType.ADD_ACCOUNT_SUCCESS) {
             let params2 = {
                 ...params,
                 'currentPage': 1,
             }
-            dispatch(freelancerAction.getLisFreelancer(params2));
+            dispatch(accountAction.getLisAccount(params2));
         }
 
-        if (freelancerReducer.type === freelancerActionType.UPDATE_FREELANCER_SUCCESS) {
-            dispatch(freelancerAction.getLisFreelancer(params));
+        if (accountReducer.type === accountActionType.UPDATE_ACCOUNT_SUCCESS) {
+            dispatch(accountAction.getLisAccount(params));
         }
 
-        if (freelancerReducer.type === freelancerActionType.DELETE_FREELANCER_SUCCESS) {
+        if (accountReducer.type === accountActionType.DELETE_ACCOUNT_SUCCESS) {
             notiMessage(200, contentMessage.MESSAGE_DELETE_SUCCESS)
             let params3 = {};
-            if (listFreelancerAdmin.length === 1) {
+            if (listUserAdmin.length === 1) {
                 let page = currentPage;
                 if (currentPage > 1) {
                     params3 = {
@@ -128,14 +137,14 @@ function ListFreelancerAdmin() {
                     ...params,
                 }
             }
-            dispatch(freelancerAction.getLisFreelancer(params3));
+            dispatch(accountAction.getLisAccount(params3));
         }
-        if (freelancerReducer.type === freelancerActionType.DELETE_FREELANCER_FAILED) {
+        if (accountReducer.type === accountActionType.DELETE_ACCOUNT_FAILED) {
             notiMessage(400, contentMessage.MESSAGE_DELETE_FAILED);
-            dispatch(freelancerAction.getLisFreelancer(params));
+            dispatch(accountAction.getLisAccount(params));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [freelancerReducer]);
+    }, [accountReducer]);
 
     return (
         <Layouts>
@@ -149,7 +158,7 @@ function ListFreelancerAdmin() {
                         <span>Home</span>
                     </Breadcrumb.Item>
                     <Breadcrumb.Item>
-                        <span>List admin</span>
+                        <span>Admin management</span>
                     </Breadcrumb.Item>
                 </Breadcrumb>
             </div>
@@ -176,27 +185,27 @@ function ListFreelancerAdmin() {
                     </Col>
                 </Row>
                 <Divider />
-                <TableFreelancerAdmin
+                <TableAccountAdmin
                     loading={loading}
-                    data={listFreelancerAdmin}
+                    data={listUserAdmin}
                     currentPage={currentPage}
                     totalPage={totalPage}
                     pageSize={pageSize}
                     handleChangePage={handleChangePage}
                     setVisible={setVisible}
                     setTypeForm={setTypeForm}
-                    setFreelancer={setFreelancer}
+                    setAccountId={setAccountId}
                     handleDelete={handleDelete}
                 />
-                <ModalFreelancerAdmin
+                <ModalAccountAdmin
                     visible={visible}
                     setVisible={setVisible}
                     typeForm={typeForm}
-                    freelancer={Freelancer}
+                    accountId={accountId}
                 />
             </Card>
         </Layouts>
     );
 };
 
-export default ListFreelancerAdmin;
+export default ListUserAdmin;

@@ -26,6 +26,9 @@ import {
 import {
     watchGetListTransaction,
 } from "./transactionSagas";
+import {
+    watchGetStatisticAccount,
+} from "./statisticSagas";
 
 export default function* rootSaga() {
     yield all([
@@ -55,5 +58,8 @@ export default function* rootSaga() {
 
         // transaction
         watchGetListTransaction(),
+
+        // statistic
+        watchGetStatisticAccount(),
     ]);
 }

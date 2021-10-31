@@ -6,13 +6,13 @@ import ItemOverviewStaff from "./ItemOverviewStaff";
 import {Col, ProgressBar, Row} from "react-bootstrap";
 
 function Overview(props) {
-    const {listStaff} = props;
+    const {totalUserNormal, totalFreelancer, listNewAccount} = props;
 
     const renderListStaff = (list = []) => {
         return list.map((item) => {
             return (
                 <ItemOverviewStaff
-                    key={item.maCanBo}
+                    key={item.id}
                     item={item}
                 />
             )
@@ -46,17 +46,18 @@ function Overview(props) {
                             </Link>
                         </div>
                     </div>
-                    {/*<div className="d-flex align-items-center justify-content-center" style={{*/}
-                    {/*    height: "80%"*/}
-                    {/*}}>*/}
-                    {/*    <NoData/>*/}
-                    {/*</div>*/}
                     <div>
-                        <h4>100</h4>
+                        <h4>{totalUserNormal + totalFreelancer}</h4>
                         <ProgressBar>
-                            <ProgressBar className="bg-primary" now={60} key={1} />
-                            <ProgressBar className="bg-warning" now={40} key={2} />
-                            {/*<ProgressBar className="bg-success" now={40} key={3} />*/}
+                            <ProgressBar className="bg-primary"
+                                         now={(totalUserNormal/(totalUserNormal + totalFreelancer)) * 100}
+                                         key={1}
+                            />
+                            <ProgressBar
+                                className="bg-warning"
+                                now={(totalFreelancer/(totalUserNormal + totalFreelancer)) * 100}
+                                key={2}
+                            />
                         </ProgressBar>
                         <div className="mt-4">
                             <div className="d-flex justify-content-between wrap-item-progressbar">
@@ -68,7 +69,7 @@ function Overview(props) {
                                     Normal user
                                 </div>
                                 <div>
-                                    60 accounts
+                                    {totalUserNormal} accounts
                                 </div>
                             </div>
                             <div className="d-flex justify-content-between wrap-item-progressbar">
@@ -80,21 +81,9 @@ function Overview(props) {
                                     Freelancer
                                 </div>
                                 <div>
-                                    40 accounts
+                                    {totalFreelancer} accounts
                                 </div>
                             </div>
-                            {/*<div className="d-flex justify-content-between wrap-item-progressbar">*/}
-                            {/*    <div>*/}
-                            {/*        <FontAwesomeIcon*/}
-                            {/*            icon={faSquare}*/}
-                            {/*            className="mr-2 text-success"*/}
-                            {/*        />*/}
-                            {/*        Nghỉ hưu*/}
-                            {/*    </div>*/}
-                            {/*    <div>*/}
-                            {/*        10 cán bộ*/}
-                            {/*    </div>*/}
-                            {/*</div>*/}
                         </div>
                     </div>
                 </div>
@@ -122,7 +111,7 @@ function Overview(props) {
                             </Link>
                         </div>
                     </div>
-                    {renderListStaff(listStaff)}
+                    {renderListStaff(listNewAccount)}
                 </div>
             </Col>
         </Row>

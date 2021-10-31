@@ -1,23 +1,25 @@
 import * as React from 'react';
 import {Modal, Table, Tooltip, Tag} from 'antd';
-import {faHome, faPencilAlt, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
+import {faCalendarAlt, faPencilAlt, faTrashAlt, faUser} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {contentMessage, notiMessage} from "../../../common/Message";
+import moment from "moment";
+import DateHelper from "../../../common/DateHelper";
 import ModelManager from "../../../common/ModelManager";
 
-const {confirm} = Modal;
+const { confirm } = Modal;
 
-function TableFreelancerAdmin(props) {
+function TableAccountNormal(props) {
     const {
         loading, data, currentPage, pageSize, totalPage, handleChangePage, setVisible,
-        setTypeForm, setFreelancer, handleDelete,
+        setTypeForm, setAccountId, handleDelete,
     } = props;
     const totalItem = parseInt(pageSize) * parseInt(totalPage);
 
     const currentUserId = ModelManager.userId;
 
     const handleEdit = (value) => {
-        setFreelancer(value || {});
+        setAccountId(value.id || '');
         setVisible(true);
         setTypeForm('edit');
     }
@@ -31,8 +33,8 @@ function TableFreelancerAdmin(props) {
         },
         {
             title: 'Fullname',
-            dataIndex: 'name',
-            key: 'name',
+            dataIndex: 'username',
+            key: 'username',
             render: text => (
                 <span>
                     <span className="font-weight-bold">{text}</span>
@@ -40,14 +42,14 @@ function TableFreelancerAdmin(props) {
             ),
         },
         {
-            title: 'Address',
-            dataIndex: 'address',
-            key: 'address',
+            title: 'Username',
+            dataIndex: 'email',
+            key: 'email',
             render: text => (
                 <span>
                     <span>
                         <FontAwesomeIcon
-                            icon={faHome}
+                            icon={faUser}
                             className="mr-1 info-icon-color-2"
                         />
                     </span>
@@ -56,34 +58,30 @@ function TableFreelancerAdmin(props) {
             ),
         },
         {
-            title: 'Language',
-            dataIndex: 'language',
-            key: 'language',
-            render: text => (
-                <div>
-                    {text.split(',').map((item) => {
-                        return (<Tag color='geekblue'>{item}</Tag>)
-                    })}
-                </div>
+            title: 'Type',
+            dataIndex: 'type',
+            key: 'type',
+            render: () => (
+                <Tag color='geekblue'>
+                    User
+                </Tag>
             ),
         },
         {
-            title: 'Gender',
-            dataIndex: 'gender',
-            key: 'gender',
+            title: 'Created at',
+            dataIndex: 'createdAt',
+            key: 'createdAt',
             render: (text) => (
                 <span>
-                    {text}
-                </span>
-            ),
-        },
-        {
-            title: 'Phone Number',
-            dataIndex: 'phone',
-            key: 'phone',
-            render: (text) => (
-                <span>
-                    {text}
+                    {text && (
+                        <>
+                            <FontAwesomeIcon
+                                icon={faCalendarAlt}
+                                className="mr-1 info-icon-color-4"
+                            />
+                            {text ? moment(text).format(DateHelper.formatFullDay()) : ''}
+                        </>
+                    )}
                 </span>
             ),
         },
@@ -165,4 +163,4 @@ function TableFreelancerAdmin(props) {
         />
     );
 }
-export default TableFreelancerAdmin;
+export default TableAccountNormal;

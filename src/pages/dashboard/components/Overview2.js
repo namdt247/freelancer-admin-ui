@@ -2,57 +2,56 @@ import React from "react";
 import {faLongArrowAltRight, faSquare} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "react-router-dom";
-// import {Col, Row} from "react-bootstrap";
-// import ItemActivity from "./ItemActivity";
-import NoData from "../../../components/NoData";
+import ItemActivity from "./ItemActivity";
+import {Routes} from "../../../common/Routes";
 
-function Overview2() {
+function Overview2(props) {
+    const {listTotalFreelancer, listNewJob} = props;
+
+    const renderListNewJob = (list) => {
+        return list.map((item) => {
+            return (
+                <ItemActivity
+                    item={item}
+                />
+            )
+        })
+    }
+
+    const calculatorLanguage = (value) => {
+        let total = 0;
+        listTotalFreelancer.forEach((item) => {
+            if (item.language?.includes(value)) {
+                total++;
+            }
+        })
+        return total;
+    }
+
+    const calculatorLanguageOther = (value1, value2, value3) => {
+        let total = 0;
+        listTotalFreelancer.forEach((item) => {
+            if (
+                !item.language?.includes(value1) &&
+                !item.language?.includes(value2) &&
+                !item.language?.includes(value3)
+            ) {
+                total++;
+            }
+        })
+        return total;
+    }
+
     return (
         <>
             <div className="wrap-overview">
                 <h5 className="text-center">
                     Overview
                 </h5>
-                {/*<Row className="mt-3">*/}
-                {/*    <Col className="text-center">*/}
-                {/*        <div className="font-weight-bold">*/}
-                {/*            10*/}
-                {/*        </div>*/}
-                {/*        <div className="text-overview-content">*/}
-                {/*            Tổng cán bộ*/}
-                {/*        </div>*/}
-                {/*    </Col>*/}
-                {/*    <Col className="text-center">*/}
-                {/*        <div className="font-weight-bold">*/}
-                {/*            10*/}
-                {/*        </div>*/}
-                {/*        <div className="text-overview-content">*/}
-                {/*            Cán bộ đang hoạt động*/}
-                {/*        </div>*/}
-                {/*    </Col>*/}
-                {/*</Row>*/}
-                {/*<Row className="mt-3">*/}
-                {/*    <Col className="text-center">*/}
-                {/*        <div className="font-weight-bold">*/}
-                {/*            10*/}
-                {/*        </div>*/}
-                {/*        <div className="text-overview-content">*/}
-                {/*            Cán bộ thuyên chuyển*/}
-                {/*        </div>*/}
-                {/*    </Col>*/}
-                {/*    <Col className="text-center">*/}
-                {/*        <div className="font-weight-bold">*/}
-                {/*            10*/}
-                {/*        </div>*/}
-                {/*        <div className="text-overview-content">*/}
-                {/*            Phòng ban*/}
-                {/*        </div>*/}
-                {/*    </Col>*/}
-                {/*</Row>*/}
             </div>
             <div>
                 <h6 className="wrap-title-overview mt-1">
-                    100 freelancers
+                    {listTotalFreelancer.length} freelancers
                 </h6>
                 <div className="d-flex justify-content-between wrap-item-overview">
                     <div>
@@ -63,7 +62,7 @@ function Overview2() {
                         PHP
                     </div>
                     <div>
-                        12 freelancers
+                        {calculatorLanguage('PHP')} freelancers
                     </div>
                 </div>
                 <div className="d-flex justify-content-between wrap-item-overview">
@@ -75,7 +74,7 @@ function Overview2() {
                         Java
                     </div>
                     <div>
-                        12 freelancers
+                        {calculatorLanguage('Java')} freelancers
                     </div>
                 </div>
                 <div className="d-flex justify-content-between wrap-item-overview">
@@ -87,7 +86,7 @@ function Overview2() {
                         C#
                     </div>
                     <div>
-                        12 freelancers
+                        {calculatorLanguage('C#')} freelancers
                     </div>
                 </div>
                 <div className="d-flex justify-content-between wrap-item-overview">
@@ -96,21 +95,26 @@ function Overview2() {
                             icon={faSquare}
                             className="mr-2 info-icon-color-7"
                         />
-                        Android
+                        Other
                     </div>
                     <div>
-                        12 freelancers
+                        {calculatorLanguageOther('PHP,Java,C#')} freelancers
                     </div>
                 </div>
             </div>
             <div className="wrap-activity-history">
                 <div className="d-flex justify-content-between my-3">
                     <div>
-                        <h6>Activity log</h6>
+                        <h6 className="mb-0">
+                            Job
+                        </h6>
+                        <div className="text-overview-title">
+                            List new job
+                        </div>
                     </div>
                     <div>
                         <Link
-                            to={'#'}
+                            to={Routes.ListJob.path}
                             className="dashboard-text-link"
                         >
                             <span className="mr-1">
@@ -123,12 +127,7 @@ function Overview2() {
                     </div>
                 </div>
                 <div>
-                    <NoData/>
-                    {/*<ItemActivity />*/}
-                    {/*<ItemActivity />*/}
-                    {/*<ItemActivity />*/}
-                    {/*<ItemActivity />*/}
-                    {/*<ItemActivity />*/}
+                    {renderListNewJob(listNewJob)}
                 </div>
             </div>
         </>

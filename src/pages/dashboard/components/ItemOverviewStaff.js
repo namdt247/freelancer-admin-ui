@@ -10,12 +10,8 @@ import {Link} from "react-router-dom";
 function ItemOverviewStaff(props) {
     const {item} = props;
 
-    let fullName = item.hoTen || '';
-    let staffCode = item.maCanBo2 || '';
-    let createdAt = item.ngayTao ? moment(item.ngayTao).format(DateHelper.formatFullDay()) : ''
-
-    let pathDetail = Routes.DetailStaff.path;
-    let pathDetailSlice = pathDetail.slice(0, pathDetail.length - 3);
+    let fullName = item.username || '';
+    let createdAt = item.createdAt ? moment(item.createdAt).format(DateHelper.formatFullDay()) : ''
 
     return (
         <Row className="py-2 mx-0 wrap-item-staff">
@@ -28,11 +24,11 @@ function ItemOverviewStaff(props) {
             </Col>
             <Col className="px-2">
                 <div className="font-weight-bold">
-                    {fullName} - {staffCode}
+                    {fullName}
                 </div>
                 <div className="text-gray">
                     <span style={{fontWeight: '500'}}>
-                        Ngày tạo:{' '}
+                        Created at:{' '}
                     </span>
                     <span>
                         {createdAt}
@@ -41,7 +37,7 @@ function ItemOverviewStaff(props) {
             </Col>
             <Col className="col-auto d-flex align-items-center pr-0 pl-2">
                 <Link
-                    to={`${pathDetailSlice}${item.maCanBo}`}
+                    to={Routes.ListAccountNormal.path}
                 >
                     <span className="info-icon-color-8 wrap-activity-user-info">
                         <FontAwesomeIcon

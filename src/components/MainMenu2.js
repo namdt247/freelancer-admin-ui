@@ -83,7 +83,7 @@ function MainMenu2(props) {
                     Management
                 </div>
                 <Menu.Item key="3">
-                    <Link to={Routes.ListAccountAdmin.path}>
+                    <Link to={Routes.ListAccountNormal.path}>
                         <div className="d-flex align-items-center">
                             <Icon type="team"/>
                             <span className="text-menu-link">
