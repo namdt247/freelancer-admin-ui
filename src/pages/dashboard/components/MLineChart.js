@@ -1,5 +1,9 @@
 import * as React from "react";
 import {Line} from "react-chartjs-2";
+import {Link} from "react-router-dom";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faLongArrowAltRight} from "@fortawesome/free-solid-svg-icons";
+import {Routes} from "../../../common/Routes";
 // import NoData from "../../../components/NoData";
 
 function MLineChart(props) {
@@ -24,7 +28,7 @@ function MLineChart(props) {
         labels: labelLine,
         datasets: [
             {
-                label: 'Normal user',
+                label: 'Revenue',
                 fill: false,
                 data: [0,0,0,0,0,6,100,8,0,0,0,9],
                 borderColor: '#fd9e38',
@@ -41,24 +45,24 @@ function MLineChart(props) {
                 pointRadius: 4,
                 pointHitRadius: 1,
             },
-            {
-                label: 'Freelancer',
-                fill: false,
-                data: [0,0,0,0,0,2,3,2,0,0,0,0],
-                borderColor: '#25b986',
-                // lineTension: .4,
-                borderDash: [],
-                borderWidth: 1,
-                pointBorderColor: '#25b986',
-                pointBackgroundColor: '#fff',
-                pointBorderWidth: 1.5,
-                pointHoverRadius: 4,
-                pointHoverBackgroundColor: '#25b986',
-                pointHoverBorderColor: '#25b986',
-                pointHoverBorderWidth: 1,
-                pointRadius: 4,
-                pointHitRadius: 1,
-            },
+            // {
+            //     label: 'Freelancer',
+            //     fill: false,
+            //     data: [0,0,0,0,0,2,3,2,0,0,0,0],
+            //     borderColor: '#25b986',
+            //     // lineTension: .4,
+            //     borderDash: [],
+            //     borderWidth: 1,
+            //     pointBorderColor: '#25b986',
+            //     pointBackgroundColor: '#fff',
+            //     pointBorderWidth: 1.5,
+            //     pointHoverRadius: 4,
+            //     pointHoverBackgroundColor: '#25b986',
+            //     pointHoverBorderColor: '#25b986',
+            //     pointHoverBorderWidth: 1,
+            //     pointRadius: 4,
+            //     pointHitRadius: 1,
+            // },
         ]
     };
 
@@ -72,7 +76,7 @@ function MLineChart(props) {
                 },
                 scaleLabel: {
                     display: true,
-                    labelString: 'Accounts'
+                    labelString: 'USD'
                 }
             }]
         }
@@ -82,10 +86,23 @@ function MLineChart(props) {
         <div className="wrap-component-overview-3 mt-3">
             <div className="d-flex justify-content-between mb-3">
                 <div>
-                    <h6 className="mb-0">User chart</h6>
+                    <h6 className="mb-0">Financial chart</h6>
                     <div className="text-overview-title">
-                        User statistics by month
+                        Financial statistics this month
                     </div>
+                </div>
+                <div>
+                    <Link
+                        to={Routes.MainReport.path}
+                        className="dashboard-text-link"
+                    >
+                        <span className="mr-1">
+                            See details
+                        </span>
+                        <FontAwesomeIcon
+                            icon={faLongArrowAltRight}
+                        />
+                    </Link>
                 </div>
             </div>
             {/*<div className="d-flex justify-content-center align-items-center" style={{*/}

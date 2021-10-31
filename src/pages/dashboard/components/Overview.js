@@ -32,19 +32,6 @@ function Overview(props) {
                                 Condition user of staff on the system
                             </div>
                         </div>
-                        <div>
-                            <Link
-                                to={''}
-                                className="dashboard-text-link"
-                            >
-                                <span className="mr-1">
-                                    See details
-                                </span>
-                                <FontAwesomeIcon
-                                    icon={faLongArrowAltRight}
-                                />
-                            </Link>
-                        </div>
                     </div>
                     <div>
                         <h4>{totalUserNormal + totalFreelancer}</h4>

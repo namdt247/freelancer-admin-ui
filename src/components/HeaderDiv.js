@@ -1,5 +1,5 @@
 import * as React from 'react';
-import logo from '../assets/images/logo.svg';
+import logo from '../assets/images/logo.png';
 import {Link, useHistory} from 'react-router-dom';
 import {Avatar, Dropdown, Menu} from 'antd';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
