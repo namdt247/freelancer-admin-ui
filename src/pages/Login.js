@@ -8,6 +8,7 @@ import {loginAction} from "../actions";
 import {loginActionType} from "../actions/actionTypes";
 import {Routes} from "../common/Routes";
 import {contentMessage, notiMessage} from "../common/Message";
+import APICode from "../common/APICode";
 
 function Login(props) {
     const dispatch = useDispatch();
@@ -46,9 +47,15 @@ function Login(props) {
             history.push(Routes.Dashboard.path);
         }
         if (loginReducer.type === loginActionType.LOGIN_FAILED) {
-            notiMessage(400, contentMessage.MESSAGE_LOGIN_FAILED);
-            message.destroy();
-            setLoadingSubmit(false);
+            if (loginReducer.status === APICode.PERMISSION_DENIED) {
+                notiMessage(400, loginReducer.message || contentMessage.MESSAGE_LOGIN_FAILED);
+                message.destroy();
+                setLoadingSubmit(false);
+            } else {
+                notiMessage(400, contentMessage.MESSAGE_LOGIN_FAILED);
+                message.destroy();
+                setLoadingSubmit(false);
+            }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loginReducer]);

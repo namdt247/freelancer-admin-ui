@@ -7,6 +7,7 @@ import APICode from "../common/APICode";
 
 function* loginSubmit({params}) {
     let response = yield API.requestPostAPI(APIConfig.URL_LOGIN, params);
+    console.log(response)
     if (response && parseInt(response.status) === APICode.SUCCESS) {
         ModelManager.setToken(response.data?.credential?.accessToken).then(
             ModelManager.setUserName(response.data?.account?.username || '').then(
@@ -14,7 +15,7 @@ function* loginSubmit({params}) {
                     ModelManager.setUserId(response.data?.account?.id || '').then(
                         yield put({
                             type: loginActionType.LOGIN_SUCCESS,
-                            status: response.statusCode,
+                            status: response.status,
                         }),
                     ),
                 ),
@@ -24,8 +25,8 @@ function* loginSubmit({params}) {
         // show message
         yield put({
             type: loginActionType.LOGIN_FAILED,
-            data: response.data,
-            status: response.statusCode,
+            message: response.message,
+            status: response.status,
         });
     }
 }

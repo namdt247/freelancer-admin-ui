@@ -19,8 +19,8 @@ const loginReducer = (state = initialState, action) => {
         case loginActionType.LOGIN_FAILED: // login failed
             return {
                 type: loginActionType.LOGIN_FAILED,
-                data: action.data,
                 status: action.status,
+                message: action.message,
             };
         case loginActionType.LOGOUT_SUBMIT:
             return {
