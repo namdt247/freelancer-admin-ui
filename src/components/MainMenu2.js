@@ -33,10 +33,34 @@ function MainMenu2(props) {
 
     useEffect(() => {
         let currentUrl = '';
-        let currentUrl2 = '';
         if (urlPath && urlPath !== "/") {
             currentUrl = urlPath.split("/").filter((el) => el)[0];
-            currentUrl2 = urlPath.split("/").filter((el) => el)[1];
+        }
+
+        switch (currentUrl) {
+            case Routes.Dashboard.path.slice(1, Routes.Dashboard.path.length):
+                setActiveMenu('1');
+                break;
+            case Routes.ListAccountAdmin.path.slice(1, Routes.ListAccountAdmin.path.length):
+                setActiveMenu('2');
+                break;
+            case Routes.ListAccountNormal.path.slice(1, Routes.ListAccountNormal.path.length):
+                setActiveMenu('3');
+                break;
+            case Routes.ListFreelancer.path.slice(1, Routes.ListFreelancer.path.length):
+                setActiveMenu('4');
+                break;
+            case Routes.ListJob.path.slice(1, Routes.ListJob.path.length):
+                setActiveMenu('5');
+                break;
+            case Routes.ListTransaction.path.slice(1, Routes.ListTransaction.path.length):
+                setActiveMenu('6');
+                break;
+            case Routes.MainReport.path.slice(1, Routes.MainReport.path.length):
+                setActiveMenu('7');
+                break;
+            default:
+                break;
         }
     }, [urlPath])
 

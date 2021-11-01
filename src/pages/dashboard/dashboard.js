@@ -3,16 +3,20 @@ import {useEffect, useState} from 'react';
 import Layouts from '../../components/Layouts';
 import {Drawer} from 'antd';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAngleDoubleLeft} from "@fortawesome/free-solid-svg-icons";
+import {faAngleDoubleLeft, faLongArrowAltRight} from "@fortawesome/free-solid-svg-icons";
 import WelCome from "./components/WelCome";
 import Overview2 from "./components/Overview2";
 import Overview from "./components/Overview";
-import MLineChart from "./components/MLineChart";
 import {Col, Row} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {accountAction, freelancerAction, jobAction, statisticAction} from "../../actions";
 import {accountActionType, freelancerActionType, jobActionType, statisticActionType} from "../../actions/actionTypes";
 import LoadingData from "../../components/LoadingData";
+import Barchart from "./components/Barchart";
+import {Link} from "react-router-dom";
+import {Routes} from "../../common/Routes";
+import moment from "moment";
+import DateHelper from "../../common/DateHelper";
 
 function Dashboard() {
     const dispatch = useDispatch();
@@ -28,6 +32,8 @@ function Dashboard() {
     const [listNewAccount, setListNewAccount] = useState([]);
     const [listTotalFreelancer, setListTotalFreelancer] = useState([]);
     const [listNewJob, setListNewJob] = useState([]);
+    const [statisticJob, setStatisticJob] = useState({});
+    const [statisticFinancial, setStatisticFinancial] = useState([]);
 
     const [visible, setVisible] = useState(false);
 
@@ -59,6 +65,13 @@ function Dashboard() {
 
     useEffect(() => {
         dispatch(statisticAction.statisticAccount());
+        dispatch(statisticAction.statisticJob());
+
+        let paramsFinancial = {
+            startDate:moment().add(-29, 'days').format(DateHelper.formatFullDay2()),
+            endDate: moment().format(DateHelper.formatFullDay2()),
+        }
+        dispatch(statisticAction.statisticFinancial(paramsFinancial));
 
         let paramsFreelancer = {
             'currentPage': 1,
@@ -78,6 +91,7 @@ function Dashboard() {
             'pageSize': 5,
         }
         dispatch(jobAction.getLisJob(paramsJob));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -88,6 +102,14 @@ function Dashboard() {
             setTotalUserNormal(statisticReducer.data?.totalUserNormal || 0);
             setTotalFreelancer(statisticReducer.data?.totalFreelancer || 0);
             setLoading(false);
+        }
+
+        if (statisticReducer.type === statisticActionType.GET_STATISTIC_JOB_SUCCESS) {
+            setStatisticJob(statisticReducer.data || {});
+        }
+
+        if (statisticReducer.type === statisticActionType.GET_STATISTIC_FINANCIAL_SUCCESS) {
+            setStatisticFinancial(statisticReducer.data || []);
         }
     }, [statisticReducer]);
 
@@ -126,15 +148,40 @@ function Dashboard() {
                         totalFreelancer={totalFreelancer}
                         listNewAccount={listNewAccount}
                     />
-                    <MLineChart
-                        staffByDepartment={[]}
-                    />
+
+                    <div className="wrap-component-overview-3 mt-3">
+                        <div className="d-flex justify-content-between mb-3">
+                            <div>
+                                <h6 className="mb-0">Financial chart</h6>
+                                <div className="text-overview-title">
+                                    Revenue in the last 30 days
+                                </div>
+                            </div>
+                            <div>
+                                <Link
+                                    to={Routes.ReportFinancial.path}
+                                    className="dashboard-text-link"
+                                >
+                                    <span className="mr-1">
+                                        See details
+                                    </span>
+                                    <FontAwesomeIcon
+                                        icon={faLongArrowAltRight}
+                                    />
+                                </Link>
+                            </div>
+                        </div>
+                        <Barchart
+                            statisticFinancial={statisticFinancial}
+                        />
+                    </div>
                 </Col>
                 <Col xl={4} className="pl-md-2">
                     <div className="wrap-component-overview-2 d-none d-xl-block">
                         <Overview2
                             listTotalFreelancer={listTotalFreelancer}
                             listNewJob={listNewJob}
+                            statisticJob={statisticJob}
                         />
                     </div>
                     <Drawer
@@ -150,6 +197,7 @@ function Dashboard() {
                         <Overview2
                             listTotalFreelancer={listTotalFreelancer}
                             listNewJob={listNewJob}
+                            statisticJob={statisticJob}
                         />
                     </Drawer>
                 </Col>

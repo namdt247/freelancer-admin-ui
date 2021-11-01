@@ -11,6 +11,7 @@ import ListFreelancer from "./pages/freelancer/ListFreelancer";
 import ListUserNormal from "./pages/user-normal/ListUserNormal";
 import ListTransaction from "./pages/transaction/ListTransaction";
 import ListJob from "./pages/job/ListJob";
+import StatisticFinancial from "./pages/report-statistic/StatisticFinancial";
 
 export default () => (
     <Router>
@@ -34,6 +35,7 @@ export default () => (
 
             {/* report */}
             <Route exact path={Routes.MainReport.path} component={MainReport} />
+            <Route exact path={Routes.ReportFinancial.path} component={StatisticFinancial} />
 
             <Route path="*" component={NotFound} />
         </Switch>

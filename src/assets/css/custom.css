@@ -655,8 +655,12 @@ div.search i.anticon-close-circle:hover {
 }
 
 /* style line chart */
-.staff-line-chart {
-    max-height: 220px;
+.bar-chart-1 {
+    max-height: 250px;
+}
+
+.bar-chart-2 {
+    max-height: calc(100vh - 350px);
 }
 
 /* style card */

@@ -5,7 +5,7 @@ import {Breadcrumb, Card} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHome} from "@fortawesome/free-solid-svg-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {freelancerAction, jobAction} from "../../actions";
+import {jobAction} from "../../actions";
 import {jobActionType} from "../../actions/actionTypes";
 import {Routes} from "../../common/Routes";
 import DrawerJob from "./components/DrawerJob";
@@ -31,7 +31,7 @@ function ListJob() {
     const pageSize = 10;
 
     // search
-    const [fullName, setFullName] = useState('');
+    // const [fullName, setFullName] = useState('');
 
     let params = {
         'currentPage': currentPage,
@@ -48,17 +48,17 @@ function ListJob() {
         )
     }
 
-    const handleChangeKeyword = (e) => {
-        setFullName(e.target.value || '');
-    }
+    // const handleChangeKeyword = (e) => {
+    //     setFullName(e.target.value || '');
+    // }
 
-    const handleSearch = () => {
-        let paramSearch = {
-            ...params,
-            currentPage: 1,
-        }
-        dispatch(jobAction.getLisJob(paramSearch));
-    }
+    // const handleSearch = () => {
+    //     let paramSearch = {
+    //         ...params,
+    //         currentPage: 1,
+    //     }
+    //     dispatch(jobAction.getLisJob(paramSearch));
+    // }
 
     const handleChangePage = (value) => {
         setCurrentPage(value);

@@ -24,4 +24,5 @@ export const Routes = {
 
     // report
     MainReport: { path: '/statistical-report' },
+    ReportFinancial: { path: '/statistical-report/financial' },
 };

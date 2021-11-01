@@ -36,4 +36,6 @@ export const APIConfig = {
 
     // statistic
     URL_STATISTIC_ACCOUNT: '/api/admin/statistic/account',
+    URL_STATISTIC_JOB: '/api/admin/statistic/job',
+    URL_STATISTIC_FINANCIAL: '/api/admin/statistic/financial',
 };

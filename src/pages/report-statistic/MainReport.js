@@ -5,17 +5,11 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHome} from "@fortawesome/free-solid-svg-icons";
 import Layouts from "../../components/Layouts";
 import ReportItem from "./components/ReportItem";
-import report1 from "../../assets/images/report/department.png";
 import report2 from "../../assets/images/report/contract.png";
 import {Link} from "react-router-dom";
-import {Row, Col} from "react-bootstrap";
-import {notiMessage} from "../../common/Message";
+import {Col, Row} from "react-bootstrap";
 
 function MainReport() {
-
-    const handleClick = () => {
-        notiMessage(300, 'Feature under development');
-    }
 
     return (
         <Layouts>
@@ -45,7 +39,7 @@ function MainReport() {
             </div>
             <Row className="wrap-parent-item-report">
                 <Col className="col-md-4 col-12 pr-md-2">
-                    <Link to={'#'} onClick={handleClick}>
+                    <Link to={Routes.ReportFinancial.path}>
                         <Card
                             bordered={false}
                             bodyStyle={{padding: 0}}

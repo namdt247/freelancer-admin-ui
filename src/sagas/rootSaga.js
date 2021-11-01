@@ -28,6 +28,8 @@ import {
 } from "./transactionSagas";
 import {
     watchGetStatisticAccount,
+    watchGetStatisticJob,
+    watchGetStatisticFinancial,
 } from "./statisticSagas";
 
 export default function* rootSaga() {
@@ -61,5 +63,7 @@ export default function* rootSaga() {
 
         // statistic
         watchGetStatisticAccount(),
+        watchGetStatisticJob(),
+        watchGetStatisticFinancial(),
     ]);
 }

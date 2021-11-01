@@ -1,8 +1,5 @@
 import * as React from 'react';
-import {Avatar, Rate, Table, Tag} from 'antd';
-import {faHome} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import Util from "../../../common/Util";
+import {Table, Tag} from 'antd';
 import moment from "moment";
 import DateHelper from "../../../common/DateHelper";
 
@@ -11,8 +8,6 @@ function TableTransaction(props) {
         loading, data, currentPage, pageSize, totalPage, handleChangePage,
     } = props;
     const totalItem = parseInt(pageSize) * parseInt(totalPage);
-
-    console.log(data)
 
     const columns = [
         {

@@ -135,4 +135,16 @@ export const statisticAction = {
             params,
         };
     },
+    statisticJob: (params) => {
+        return {
+            type: statisticActionType.GET_STATISTIC_JOB,
+            params,
+        };
+    },
+    statisticFinancial: (params) => {
+        return {
+            type: statisticActionType.GET_STATISTIC_FINANCIAL,
+            params,
+        };
+    },
 };

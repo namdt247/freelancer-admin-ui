@@ -1,6 +1,6 @@
 import {Col, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faHistory, faLaptop} from "@fortawesome/free-solid-svg-icons";
+import {faLaptop} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import moment from "moment";
 import DateHelper from "../../../common/DateHelper";

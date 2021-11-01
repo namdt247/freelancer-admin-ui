@@ -1,47 +1,62 @@
-import * as React from 'react';
-import {Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis,} from 'recharts';
+import React from 'react';
+import {Bar} from 'react-chartjs-2';
+import moment from "moment";
+import DateHelper from "../../../common/DateHelper";
 
-function Barchart(props) {
+export default function Barchart(props) {
+    const {statisticFinancial, type} = props;
 
-    const {staffByDepartment} = props;
-
-    const convertData = (list) => {
-        let newList = [];
-        list.forEach(item => {
-            if (item.tongCanBoTheoPhongBan > 0) {
-                let obj = {
-                    name: item.tenPhongBan || '',
-                    Nam: item.tongCanBoTheoPhongBan || 0,
-                    Nữ: 0,
-                    amt: item.tongCanBoTheoPhongBan || 0,
-                }
-                newList.push(obj);
-            }
+    const convertTitle = (list) => {
+        let newArr = [];
+        list.forEach((item) => {
+            newArr.push(item[0] ? moment(item[0]).format(DateHelper.formatFullDay()) : '');
         })
-
-        return newList;
+        return newArr;
     }
 
+    const convertData = (list) => {
+        let newArr = [];
+        list.forEach((item) => {
+            newArr.push(item[1]);
+        })
+        return newArr;
+    }
+
+    const chartData = {
+        labels: convertTitle(statisticFinancial),
+        datasets: [
+            {
+                label: 'Revenue',
+                data: convertData(statisticFinancial),
+                backgroundColor:'#25B986',
+            },
+
+        ]
+    };
+
+    const optionsData = {
+        responsive: true,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    min: 0,
+                    callback: function(value) {
+                        return value + ' USD';
+                    }
+                }
+            }]
+        },
+        legend: {
+            display: false,
+        }
+    };
+
     return (
-        <ResponsiveContainer width="100%" height={300}>
-            <BarChart
-                data={convertData(staffByDepartment)}
-                margin={{
-                    top: 20,
-                    right: 10,
-                    left: 10,
-                    bottom: 5,
-                }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="Nam" barSize={30} stackId="a" fill="#5984EE" />
-                <Bar dataKey="Nữ" barSize={30} stackId="a" fill="#45CD93" />
-            </BarChart>
-        </ResponsiveContainer>
+        <Bar
+            data={chartData}
+            options={optionsData}
+            className={`${(type === 1) ? 'bar-chart-2' : 'bar-chart-1'}`}
+        />
     );
 }
-export default Barchart;

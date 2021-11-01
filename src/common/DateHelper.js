@@ -9,6 +9,11 @@ class DateHelper {
         return strFormat;
     }
 
+    formatFullDay2() {
+        let strFormat = "YYYY-MM-DD";
+        return strFormat;
+    }
+
     formatMonth() {
         let strFormat = "MM/YYYY";
         return strFormat;

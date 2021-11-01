@@ -5,7 +5,7 @@ import {Breadcrumb, Card, Divider} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHome} from "@fortawesome/free-solid-svg-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {freelancerAction, transactionAction} from "../../actions";
+import {transactionAction} from "../../actions";
 import {transactionActionType} from "../../actions/actionTypes";
 import {Routes} from "../../common/Routes";
 import TableTransaction from "./components/TableTransaction";
@@ -41,13 +41,13 @@ function ListTransaction() {
         )
     }
 
-    const handleSearch = () => {
-        let paramSearch = {
-            ...params,
-            currentPage: 1,
-        }
-        dispatch(freelancerAction.getLisFreelancer(paramSearch));
-    }
+    // const handleSearch = () => {
+    //     let paramSearch = {
+    //         ...params,
+    //         currentPage: 1,
+    //     }
+    //     dispatch(freelancerAction.getLisFreelancer(paramSearch));
+    // }
 
     const handleChangePage = (value) => {
         setCurrentPage(value);

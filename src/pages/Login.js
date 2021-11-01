@@ -20,7 +20,7 @@ function Login(props) {
     const {getFieldDecorator} = props.form;
 
     const openMessage = () => {
-        message.loading({ content: 'Loading...'});
+        message.loading('Loading...', 60);
     };
 
     const handleSubmit = e => {

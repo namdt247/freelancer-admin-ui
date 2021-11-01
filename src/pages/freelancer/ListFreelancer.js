@@ -61,11 +61,11 @@ function ListFreelancer() {
         dispatch(freelancerAction.getLisFreelancer(paramSearch));
     }
 
-    const handleShowForm = () => {
-        setVisible(true);
-        setTypeForm('add');
-        setFreelancerId('');
-    }
+    // const handleShowForm = () => {
+    //     setVisible(true);
+    //     setTypeForm('add');
+    //     setFreelancerId('');
+    // }
 
     const handleChangePage = (value) => {
         setCurrentPage(value);

@@ -4,14 +4,21 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "react-router-dom";
 import ItemActivity from "./ItemActivity";
 import {Routes} from "../../../common/Routes";
+import {Row, Col} from "react-bootstrap";
 
 function Overview2(props) {
-    const {listTotalFreelancer, listNewJob} = props;
+    const {listTotalFreelancer, listNewJob, statisticJob} = props;
+
+    const totalJob = statisticJob.totalJob || 0;
+    const totalJobClosed = statisticJob.totalJobClosed || 0;
+    const totalJobDoing = statisticJob.totalJobDoing || 0;
+    const totalJobDone = statisticJob.totalJobDone || 0;
 
     const renderListNewJob = (list) => {
         return list.map((item) => {
             return (
                 <ItemActivity
+                    key={item.id}
                     item={item}
                 />
             )
@@ -48,6 +55,42 @@ function Overview2(props) {
                 <h5 className="text-center">
                     Overview
                 </h5>
+                <Row className="mt-3">
+                    <Col className="text-center">
+                        <div className="font-weight-bold">
+                            {totalJob}
+                        </div>
+                        <div className="text-overview-content">
+                            Total job
+                        </div>
+                    </Col>
+                    <Col className="text-center">
+                        <div className="font-weight-bold">
+                            {totalJobClosed}
+                        </div>
+                        <div className="text-overview-content">
+                            Job closed
+                        </div>
+                    </Col>
+                </Row>
+                <Row className="mt-3">
+                    <Col className="text-center">
+                        <div className="font-weight-bold">
+                            {totalJobDoing}
+                        </div>
+                        <div className="text-overview-content">
+                            Job doing
+                        </div>
+                    </Col>
+                    <Col className="text-center">
+                        <div className="font-weight-bold">
+                            {totalJobDone}
+                        </div>
+                        <div className="text-overview-content">
+                            Jon done
+                        </div>
+                    </Col>
+                </Row>
             </div>
             <div>
                 <h6 className="wrap-title-overview mt-1">
@@ -98,7 +141,7 @@ function Overview2(props) {
                         Other
                     </div>
                     <div>
-                        {calculatorLanguageOther('PHP,Java,C#')} freelancers
+                        {calculatorLanguageOther('PHP', 'Java', 'C#')} freelancers
                     </div>
                 </div>
             </div>

@@ -7,7 +7,9 @@ import {Routes} from "../../../common/Routes";
 // import NoData from "../../../components/NoData";
 
 function MLineChart(props) {
-    // const {staffByDepartment} = props;
+    const {statisticFinancial} = props;
+
+    console.log(statisticFinancial)
 
     const labelLine = [
         'Jan',

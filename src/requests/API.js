@@ -16,23 +16,12 @@ function* requestAPI(url, method, params) {
             body: JSON.stringify(params),
         }).then(response => {
             if (response.status === APICode.SUCCESS) return response.json();
-            if (response.status === APICode.AUTHORIZATION) return window.location = '/dang-nhap';
+            if (response.status === APICode.AUTHORIZATION || response.status === APICode.PERMISSION_DENIED) {
+                ModelManager.clearLocalStorage();
+                return window.location = '/login';
+            }
             else return -1;
         });
-
-        // if (res.status === APICode.RESET_TOKEN || res.status === APICode.RESET_LOGIN
-        //     || res.status === APICode.NON_AUTH || res.status === APICode.TOKEN_ERROR) {
-        //     ModelManager.clearLocalStorage();
-        //     window.location = PathRoute.Login;
-        // // supplier not exist
-        // } else if (res.status === APICode.SUPPLIER_NOT_EXIST) {
-        //     window.location = PathRoute.Register;
-        // // supplier pending
-        // } else if (res.status === APICode.SUPPLIER_PENDING) {
-        //     window.location = PathRoute.RegisterSuccess;
-        // } else {
-        //     return res;
-        // }
         return res;
     } catch (error) {
         console.log(error);
