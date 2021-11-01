@@ -31,6 +31,9 @@ import {
     watchGetStatisticJob,
     watchGetStatisticFinancial,
 } from "./statisticSagas";
+import {
+    watchGetUserInfo,
+} from "./userSagas";
 
 export default function* rootSaga() {
     yield all([
@@ -65,5 +68,8 @@ export default function* rootSaga() {
         watchGetStatisticAccount(),
         watchGetStatisticJob(),
         watchGetStatisticFinancial(),
+
+        // user info
+        watchGetUserInfo(),
     ]);
 }

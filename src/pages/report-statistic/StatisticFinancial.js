@@ -97,7 +97,7 @@ function StatisticFinancial() {
             >
                 {loading && <LoadingData />}
                 <Row gutter={16} className="mb-custom-1">
-                    <Col md={6} className="search">
+                    <Col md={9} className="search">
                         <RangePicker
                             ranges={{
                                 '7 days ago': [moment().add(-6, 'days'), moment()],
@@ -106,7 +106,7 @@ function StatisticFinancial() {
                             onChange={handleChangeTime}
                         />
                     </Col>
-                    <Col md={18} className="mt-md-0 mt-2">
+                    <Col md={15} className="mt-md-0 mt-2">
                         <Button type="primary" className="btn-search" onClick={handleSearch}>
                             Search
                         </Button>

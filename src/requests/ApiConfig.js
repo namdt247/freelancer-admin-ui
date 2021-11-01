@@ -8,7 +8,8 @@ export const APIConfig = {
     // login
     URL_LOGIN: '/admin/login',
 
-    // dashboard
+    // user info
+    URL_USER_INFO: '/information',
 
     // account
     URL_LIST_ACCOUNT: '/api/admin/account',

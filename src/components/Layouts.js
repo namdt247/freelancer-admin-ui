@@ -1,12 +1,23 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import HeaderDiv from './HeaderDiv';
 import {Drawer, Layout} from 'antd';
 import MainMenu2 from "./MainMenu2";
 import FooterContent from "./FooterContent";
+import {useDispatch, useSelector} from "react-redux";
+import {userActionType} from "../actions/actionTypes";
+import ModelManager from "../common/ModelManager";
+import {loginAction} from "../actions";
+import {Routes} from "../common/Routes";
+import {useHistory} from "react-router-dom";
 
 const {Header, Sider, Content, Footer} = Layout;
 
 function Layouts(props) {
+    const dispatch = useDispatch();
+    let history = useHistory();
+
+    const userReducer = useSelector((state) => state.userReducer);
+
     const [collapsed, setCollapsed] = useState(false);
 
     const toggle = () => {
@@ -21,6 +32,14 @@ function Layouts(props) {
     const showSidebar = () => {
         setVisible(true);
     }
+
+    useEffect(() => {
+        if (userReducer.type === userActionType.GET_USER_INFO_FAILED) {
+            ModelManager.clearLocalStorage();
+            dispatch(loginAction.postLogout());
+            history.push(Routes.Login.path);
+        }
+    }, [userReducer]);
 
     return (
         <Layout className={`${props.classname}`}>

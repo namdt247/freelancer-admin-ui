@@ -3,7 +3,7 @@ import {
     freelancerActionType,
     jobActionType,
     loginActionType, statisticActionType,
-    transactionActionType
+    transactionActionType, userActionType
 } from './actionTypes';
 
 export const loginAction = {
@@ -144,6 +144,15 @@ export const statisticAction = {
     statisticFinancial: (params) => {
         return {
             type: statisticActionType.GET_STATISTIC_FINANCIAL,
+            params,
+        };
+    },
+};
+
+export const userAction = {
+    getUserInfo: (params) => {
+        return {
+            type: userActionType.GET_USER_INFO,
             params,
         };
     },
