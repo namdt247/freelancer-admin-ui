@@ -1,6 +1,6 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
-import {Breadcrumb, Button, Card, Col, Divider, Row, DatePicker} from "antd";
+import {Breadcrumb, Button, Card, Col, DatePicker, Divider, Row, Empty} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHome} from "@fortawesome/free-solid-svg-icons";
 import {useDispatch, useSelector} from "react-redux";
@@ -114,10 +114,18 @@ function StatisticFinancial() {
                 </Row>
                 <Divider />
 
-                <Barchart
-                    statisticFinancial={statisticFinancial}
-                    type={1}
-                />
+                {statisticFinancial.length > 0
+                    ? (
+                        <Barchart
+                            statisticFinancial={statisticFinancial}
+                            type={1}
+                        />
+                    ) : (
+                        <Empty
+                            image={Empty.PRESENTED_IMAGE_SIMPLE}
+                        />
+                    )
+                }
             </Card>
         </Layouts>
     );
