@@ -137,12 +137,12 @@ function DrawerInfoAccount(props) {
                             <Row gutter={16}>
                                 <Col md={12}>
                                     <div className="mt-2 mt-md-0">
-                                    <span className="mr-1 font-weight-bold">
-                                        Renter:
-                                    </span>
-                                        <span>
-                                        {renterName}
-                                    </span>
+                                        <span className="mr-1 font-weight-bold">
+                                            Renter:
+                                        </span>
+                                        <span className="text-capitalize">
+                                            {renterName}
+                                        </span>
                                     </div>
                                 </Col>
                             </Row>
@@ -270,8 +270,15 @@ function DrawerInfoAccount(props) {
                                             Language:
                                         </span>
                                         <span>
-                                            {language.split(',').map((item) => {
-                                                return (<Tag color='geekblue'>{item}</Tag>)
+                                            {language.split(',').map((item, index) => {
+                                                return (
+                                                    <Tag
+                                                        key={index}
+                                                        color='geekblue'
+                                                    >
+                                                        {item}
+                                                    </Tag>
+                                                )
                                             })}
                                         </span>
                                     </div>

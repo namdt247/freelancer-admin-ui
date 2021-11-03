@@ -54,6 +54,11 @@ function TableJob(props) {
             title: 'Salary',
             dataIndex: 'salary',
             key: 'salary',
+            render: (text) => (
+                <span>
+                    {text}$
+                </span>
+            ),
         },
         {
             title: 'Status',

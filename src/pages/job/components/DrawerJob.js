@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from "react";
-import {Button, Col, Drawer, Form, Rate, Row, Tag} from 'antd';
+import {Avatar, Button, Col, Comment, Drawer, Empty, Form, Rate, Row, Tag} from 'antd';
 import {useDispatch, useSelector} from "react-redux";
 import {jobAction} from "../../../actions";
 import {jobActionType} from "../../../actions/actionTypes";
 import LoadingData from "../../../components/LoadingData";
 import DrawerInfoAccount from "./DrawerInfoAccount";
+import fire from "../../../firebase/config";
+import Util from "../../../common/Util";
+import moment from "moment";
+import DateHelper from "../../../common/DateHelper";
 
 function DrawerJob(props) {
     const dispatch = useDispatch();
@@ -30,6 +34,9 @@ function DrawerJob(props) {
 
     const [typeInfo, setTypeInfo] = useState(1);
 
+    // chat
+    const [message, setMessage] = useState([]);
+
     // info account
     const [visibleInfo, setVisibleInfo] = useState(false);
 
@@ -54,12 +61,80 @@ function DrawerJob(props) {
         setVisibleInfo(true);
     }
 
+    const renderChat = (list) => {
+        if (list.length === 0) {
+            return (
+                <Empty
+                    image={Empty.PRESENTED_IMAGE_SIMPLE}
+                />
+            )
+        }
+        return list.map((item) => {
+            if (item.username === 'system') {
+                return (
+                    <div key={item.id} className="d-flex justify-content-center">
+                        <Comment
+                            author={
+                                <span
+                                    className="mb-0 text-capitalize font-weight-bold"
+                                    style={{
+                                        color: "black",
+                                        fontSize: '14px',
+                                    }}
+                                >
+                                    {item.username}
+                                </span>
+                            }
+                            content={
+                                <span>{item.text}</span>
+                            }
+                            datetime={
+                                <small><i>{item.datetime ? moment(item.datetime).format(DateHelper.formatFull()) : ''}</i></small>
+                            }
+                            className="wrap-item-chat-2 mb-2"
+                        />
+                    </div>
+                )
+            }
+            return (
+                <div key={item.id} className={`${(item.username !== renter) ? 'd-flex justify-content-end' : ''}`}>
+                    <Comment
+                        author={
+                            <span
+                                className="mb-0 text-capitalize font-weight-bold"
+                                style={{
+                                    color: "black",
+                                    fontSize: '14px',
+                                }}
+                            >
+                                {item.username}
+                            </span>
+                        }
+                        avatar={
+                            <Avatar size={24}>
+                                {Util.getValueByName(item.username)}
+                            </Avatar>
+                        }
+                        content={
+                            <span>{item.text}</span>
+                        }
+                        datetime={
+                            <small><i>{item.datetime ? moment(item.datetime).format(DateHelper.formatFull()) : ''}</i></small>
+                        }
+                        className="wrap-item-chat mb-2"
+                    />
+                </div>
+            )
+        })
+    }
+
     useEffect(() => {
         if (jobId && visible) {
             let paramDetail = {
                 jobId: jobId,
             }
             dispatch(jobAction.detailJob(paramDetail));
+            setMessage([]);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [jobId, visible]);
@@ -86,6 +161,25 @@ function DrawerJob(props) {
         }
 
     }, [jobReducer]);
+
+    useEffect(() => {
+        if (visible && jobId) {
+            const itemsRef = fire.database().ref('room/' + jobId);
+            itemsRef.on('value', snapshot => {
+                const data = snapshot.val() || {};
+                let arrMes = [];
+                Object.keys(data).forEach((key) => {
+                    arrMes.push({
+                        id: key,
+                        username: data[key].username,
+                        text: data[key].text,
+                        datetime: data[key].datetime,
+                    })
+                })
+                setMessage(arrMes);
+            })
+        }
+    }, [visible, jobId]);
 
     return (
         <div>
@@ -126,7 +220,10 @@ function DrawerJob(props) {
                                 <span className="mr-1 font-weight-bold">
                                     Renter:
                                 </span>
-                                <span className="text-primary cursor-pointer" onClick={handleClickRenter}>
+                                <span
+                                    className="text-primary text-capitalize cursor-pointer"
+                                    onClick={handleClickRenter}
+                                >
                                     {renter}
                                 </span>
                             </div>
@@ -136,7 +233,10 @@ function DrawerJob(props) {
                                 <span className="mr-1 font-weight-bold">
                                     Freelancer:
                                 </span>
-                                <span className="text-primary cursor-pointer" onClick={handleClickFreelancer}>
+                                <span
+                                    className="text-primary text-capitalize cursor-pointer"
+                                    onClick={handleClickFreelancer}
+                                >
                                     {freelancer}
                                 </span>
                             </div>
@@ -217,18 +317,28 @@ function DrawerJob(props) {
                         </Col>
                     </Row>
 
-                    {/*<Row gutter={16} className="mt-4">*/}
-                    {/*    <Col md={24}>*/}
-                    {/*        <div>*/}
-                    {/*            <div className="mr-1 font-weight-bold">*/}
-                    {/*                Chat:*/}
-                    {/*            </div>*/}
-                    {/*            <div>*/}
-                    {/*                Chat*/}
-                    {/*            </div>*/}
-                    {/*        </div>*/}
-                    {/*    </Col>*/}
-                    {/*</Row>*/}
+                    <Row
+                        gutter={16}
+                        className="mt-4"
+                        style={{
+                            height: '60vh',
+                            overflowY: 'auto',
+                            padding: '0.75rem 0.5rem',
+                            backgroundColor: '#f0f2f5',
+                            borderRadius: '5px',
+                        }}
+                    >
+                        <Col md={24}>
+                            <div>
+                                <div className="font-weight-bold h6 mb-0">
+                                    Chat:
+                                </div>
+                                <div className="mt-3">
+                                    {renderChat(message)}
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
                 </Form>
                 <div
                     style={{
