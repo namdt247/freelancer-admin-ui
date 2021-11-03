@@ -117,6 +117,18 @@ export const jobAction = {
             params,
         };
     },
+    listJobDoneByAccountId: (params) => {
+        return {
+            type: jobActionType.LIST_JOB_DONE_BY_ACCOUNT_ID,
+            params,
+        };
+    },
+    listJobDoneByFreelancerId: (params) => {
+        return {
+            type: jobActionType.LIST_JOB_DONE_BY_FREELANCER_ID,
+            params,
+        };
+    },
 };
 
 export const transactionAction = {
@@ -150,10 +162,9 @@ export const statisticAction = {
 };
 
 export const userAction = {
-    getUserInfo: (params) => {
+    getUserInfo: () => {
         return {
             type: userActionType.GET_USER_INFO,
-            params,
         };
     },
 };

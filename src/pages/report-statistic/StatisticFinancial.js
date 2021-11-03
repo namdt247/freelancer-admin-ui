@@ -1,6 +1,6 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
-import {Breadcrumb, Button, Card, Col, DatePicker, Divider, Row, Empty} from "antd";
+import {Breadcrumb, Button, Card, Col, DatePicker, Divider, Empty, Row} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHome} from "@fortawesome/free-solid-svg-icons";
 import {useDispatch, useSelector} from "react-redux";
@@ -8,11 +8,11 @@ import moment from "moment";
 import DateHelper from "../../common/DateHelper";
 import {statisticAction} from "../../actions";
 import {statisticActionType} from "../../actions/actionTypes";
-import Barchart from "../dashboard/components/Barchart";
 import LoadingData from "../../components/LoadingData";
 import {Routes} from "../../common/Routes";
 import Layouts from "../../components/Layouts";
 import {notiMessage} from "../../common/Message";
+import MLineChart from "../dashboard/components/MLineChart";
 
 const {RangePicker} = DatePicker;
 
@@ -85,7 +85,7 @@ function StatisticFinancial() {
                         <span>Home</span>
                     </Breadcrumb.Item>
                     <Breadcrumb.Item>
-                        <span>User management</span>
+                        <span>Financial management</span>
                     </Breadcrumb.Item>
                 </Breadcrumb>
             </div>
@@ -97,16 +97,17 @@ function StatisticFinancial() {
             >
                 {loading && <LoadingData />}
                 <Row gutter={16} className="mb-custom-1">
-                    <Col md={9} className="search">
+                    <Col md={8} className="search">
                         <RangePicker
                             ranges={{
                                 '7 days ago': [moment().add(-6, 'days'), moment()],
                                 '30 days ago': [moment().add(-29, 'days'), moment()],
                             }}
                             onChange={handleChangeTime}
+                            className="w-100"
                         />
                     </Col>
-                    <Col md={15} className="mt-md-0 mt-2">
+                    <Col md={16} className="mt-md-0 mt-2">
                         <Button type="primary" className="btn-search" onClick={handleSearch}>
                             Search
                         </Button>
@@ -116,7 +117,7 @@ function StatisticFinancial() {
 
                 {statisticFinancial.length > 0
                     ? (
-                        <Barchart
+                        <MLineChart
                             statisticFinancial={statisticFinancial}
                             type={1}
                         />

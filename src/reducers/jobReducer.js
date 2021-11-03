@@ -86,6 +86,38 @@ const jobReducer = (state = initialState, action) => {
                 status: action.status,
                 message: action.message,
             };
+        case jobActionType.LIST_JOB_DONE_BY_ACCOUNT_ID:
+            return {
+                type: jobActionType.LIST_JOB_DONE_BY_ACCOUNT_ID,
+            };
+        case jobActionType.LIST_JOB_DONE_BY_ACCOUNT_ID_SUCCESS:
+            return {
+                type: jobActionType.LIST_JOB_DONE_BY_ACCOUNT_ID_SUCCESS,
+                data: action.data,
+                status: action.status,
+            };
+        case jobActionType.LIST_JOB_DONE_BY_ACCOUNT_ID_FAILED:
+            return {
+                type: jobActionType.LIST_JOB_DONE_BY_ACCOUNT_ID_FAILED,
+                status: action.status,
+                message: action.message,
+            };
+        case jobActionType.LIST_JOB_DONE_BY_FREELANCER_ID:
+            return {
+                type: jobActionType.LIST_JOB_DONE_BY_FREELANCER_ID,
+            };
+        case jobActionType.LIST_JOB_DONE_BY_FREELANCER_ID_SUCCESS:
+            return {
+                type: jobActionType.LIST_JOB_DONE_BY_FREELANCER_ID_SUCCESS,
+                data: action.data,
+                status: action.status,
+            };
+        case jobActionType.LIST_JOB_DONE_BY_FREELANCER_ID_FAILED:
+            return {
+                type: jobActionType.LIST_JOB_DONE_BY_FREELANCER_ID_FAILED,
+                status: action.status,
+                message: action.message,
+            };
         default:
             return state;
     }

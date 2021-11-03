@@ -7,7 +7,6 @@ import APICode from "../common/APICode";
 
 function* loginSubmit({params}) {
     let response = yield API.requestPostAPI(APIConfig.URL_LOGIN, params);
-    console.log(response)
     if (response && parseInt(response.status) === APICode.SUCCESS) {
         ModelManager.setToken(response.data?.credential?.accessToken).then(
             ModelManager.setUserName(response.data?.account?.username || '').then(

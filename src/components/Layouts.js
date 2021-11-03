@@ -6,7 +6,7 @@ import FooterContent from "./FooterContent";
 import {useDispatch, useSelector} from "react-redux";
 import {userActionType} from "../actions/actionTypes";
 import ModelManager from "../common/ModelManager";
-import {loginAction} from "../actions";
+import {loginAction, userAction} from "../actions";
 import {Routes} from "../common/Routes";
 import {useHistory} from "react-router-dom";
 
@@ -34,11 +34,17 @@ function Layouts(props) {
     }
 
     useEffect(() => {
+        dispatch(userAction.getUserInfo());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    useEffect(() => {
         if (userReducer.type === userActionType.GET_USER_INFO_FAILED) {
             ModelManager.clearLocalStorage();
             dispatch(loginAction.postLogout());
             history.push(Routes.Login.path);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userReducer]);
 
     return (

@@ -1,38 +1,34 @@
 import * as React from "react";
 import {Line} from "react-chartjs-2";
-import {Link} from "react-router-dom";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faLongArrowAltRight} from "@fortawesome/free-solid-svg-icons";
-import {Routes} from "../../../common/Routes";
-// import NoData from "../../../components/NoData";
+import moment from "moment";
+import DateHelper from "../../../common/DateHelper";
 
 function MLineChart(props) {
-    const {statisticFinancial} = props;
+    const {statisticFinancial, type} = props;
 
-    console.log(statisticFinancial)
+    const convertTitle = (list) => {
+        let newArr = [];
+        list.forEach((item) => {
+            newArr.push(item[0] ? moment(item[0]).format(DateHelper.formatFullDay()) : '');
+        })
+        return newArr;
+    }
 
-    const labelLine = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'June',
-        'July',
-        'Aug',
-        'Sept',
-        'Oct',
-        'Nov',
-        'Dec',
-    ]
+    const convertData = (list) => {
+        let newArr = [];
+        list.forEach((item) => {
+            newArr.push(item[1]);
+        })
+        return newArr;
+    }
 
     const chartData = {
-        labels: labelLine,
+        labels: convertTitle(statisticFinancial),
         datasets: [
             {
                 label: 'Revenue',
                 fill: false,
-                data: [0,0,0,0,0,6,100,8,0,0,0,9],
+                data: convertData(statisticFinancial),
                 borderColor: '#fd9e38',
                 borderWidth: 1,
                 // lineTension: .5,
@@ -47,77 +43,39 @@ function MLineChart(props) {
                 pointRadius: 4,
                 pointHitRadius: 1,
             },
-            // {
-            //     label: 'Freelancer',
-            //     fill: false,
-            //     data: [0,0,0,0,0,2,3,2,0,0,0,0],
-            //     borderColor: '#25b986',
-            //     // lineTension: .4,
-            //     borderDash: [],
-            //     borderWidth: 1,
-            //     pointBorderColor: '#25b986',
-            //     pointBackgroundColor: '#fff',
-            //     pointBorderWidth: 1.5,
-            //     pointHoverRadius: 4,
-            //     pointHoverBackgroundColor: '#25b986',
-            //     pointHoverBorderColor: '#25b986',
-            //     pointHoverBorderWidth: 1,
-            //     pointRadius: 4,
-            //     pointHitRadius: 1,
-            // },
         ]
     };
 
     const options = {
         responsive: true,
+
+        indexAxis: 'x',
         scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    precision: 0,
-                },
-                scaleLabel: {
-                    display: true,
-                    labelString: 'USD'
-                }
-            }]
-        }
+            y: {
+                beginAtZero: true,
+                labelString: 'USD',
+            }
+        },
+        // scales: {
+        //     yAxes: [{
+        //         ticks: {
+        //             beginAtZero: true,
+        //             precision: 0,
+        //         },
+        //         scaleLabel: {
+        //             display: true,
+        //             labelString: 'USD'
+        //         }
+        //     }]
+        // }
     };
 
     return (
-        <div className="wrap-component-overview-3 mt-3">
-            <div className="d-flex justify-content-between mb-3">
-                <div>
-                    <h6 className="mb-0">Financial chart</h6>
-                    <div className="text-overview-title">
-                        Financial statistics this month
-                    </div>
-                </div>
-                <div>
-                    <Link
-                        to={Routes.MainReport.path}
-                        className="dashboard-text-link"
-                    >
-                        <span className="mr-1">
-                            See details
-                        </span>
-                        <FontAwesomeIcon
-                            icon={faLongArrowAltRight}
-                        />
-                    </Link>
-                </div>
-            </div>
-            {/*<div className="d-flex justify-content-center align-items-center" style={{*/}
-            {/*    height: "200px"*/}
-            {/*}}>*/}
-            {/*    <NoData/>*/}
-            {/*</div>*/}
-            <Line
-                className="staff-line-chart"
-                data={chartData}
-                options={options}
-            />
-        </div>
+        <Line
+            className={`${(type === 1) ? 'bar-chart-2' : 'bar-chart-1'}`}
+            data={chartData}
+            options={options}
+        />
     )
 };
 

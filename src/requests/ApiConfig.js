@@ -9,7 +9,7 @@ export const APIConfig = {
     URL_LOGIN: '/admin/login',
 
     // user info
-    URL_USER_INFO: '/information',
+    URL_USER_INFO: '/api/users/information',
 
     // account
     URL_LIST_ACCOUNT: '/api/admin/account',
@@ -31,6 +31,8 @@ export const APIConfig = {
     URL_DETAIL_JOB: '/api/admin/job/detail',
     URL_UPDATE_JOB: '/api/admin/job/update',
     URL_DELETE_JOB: '/api/admin/job/delete',
+    URL_LIST_JOB_DONE_BY_ACCOUNT_ID: '/api/admin/job/getJobDoneByAccountID',
+    URL_LIST_JOB_DONE_BY_FREELANCER_ID: '/api/admin/job/getJobDoneByFreelancerId',
 
     // transaction
     URL_LIST_TRANSACTION: '/api/admin/transaction',

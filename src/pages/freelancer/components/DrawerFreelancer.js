@@ -1,15 +1,17 @@
 import React, {useEffect, useState} from "react";
 import {Button, Col, Drawer, Form, Row, Tag, Rate, Avatar} from 'antd';
 import {useDispatch, useSelector} from "react-redux";
-import {freelancerAction} from "../../../actions";
-import {freelancerActionType} from "../../../actions/actionTypes";
+import {freelancerAction, jobAction} from "../../../actions";
+import {freelancerActionType, jobActionType} from "../../../actions/actionTypes";
 import LoadingData from "../../../components/LoadingData";
 import Util from "../../../common/Util";
+import {Divider} from "antd/es";
 
 function DrawerFreelancer(props) {
     const dispatch = useDispatch();
 
     const freelancerReducer = useSelector((state) => state.freelancerReducer);
+    const jobReducer = useSelector((state) => state.jobReducer);
 
     const {visible, setVisible, typeForm, freelancerId} = props;
 
@@ -27,6 +29,9 @@ function DrawerFreelancer(props) {
     const [totalJobDone, setTotalJobDone] = useState(0);
     const [totalEarning, setTotalEarning] = useState(0);
 
+    // list job
+    const [listJob, setListJob] = useState([]);
+
     // loading
     const [loading, setLoading] = useState(false);
 
@@ -38,12 +43,36 @@ function DrawerFreelancer(props) {
         return <h5>Freelancer information</h5>
     }
 
+    const renderCommentJob = (list) => {
+        return list.map((item) => {
+            return (
+                <div key={item.id}>
+                    <div className="mb-1">
+                        <div>
+                            <span className="h6 text-primary">{item.subject}</span>
+                            {' - '}
+                            <small>{item.salary || ''}$</small>
+                        </div>
+                        <div>
+                            <Rate allowHalf value={item.rate || 0} disabled={true} />
+                            <div>
+                                <i>{item.comment}</i>
+                            </div>
+                        </div>
+                    </div>
+                    <Divider />
+                </div>
+            )
+        })
+    }
+
     useEffect(() => {
         if (freelancerId && visible) {
             let paramDetail = {
                 freelancerId: freelancerId,
             }
             dispatch(freelancerAction.detailFreelancer(paramDetail));
+            dispatch(jobAction.listJobDoneByFreelancerId(paramDetail))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [freelancerId, visible]);
@@ -69,8 +98,13 @@ function DrawerFreelancer(props) {
             setGender(data.gender || 0);
             setLoading(false);
         }
-
     }, [freelancerReducer]);
+
+    useEffect(() => {
+        if (jobReducer.type === jobActionType.LIST_JOB_DONE_BY_FREELANCER_ID_SUCCESS) {
+            setListJob(jobReducer.data || []);
+        }
+    }, [jobReducer]);
 
     return (
         <div>
@@ -96,7 +130,7 @@ function DrawerFreelancer(props) {
                                     )}
                                 </div>
                                 <div className="ml-3">
-                                    <div className="text-uppercase h4 mb-1">
+                                    <div className="text-capitalize h4 mb-1">
                                         {fullName}
                                     </div>
                                     <div className="text-lowercase text-gray">
@@ -221,6 +255,9 @@ function DrawerFreelancer(props) {
                             </div>
                         </Col>
                     </Row>
+                    <div className="mt-4">
+                        {renderCommentJob(listJob)}
+                    </div>
                 </Form>
                 <div
                     style={{

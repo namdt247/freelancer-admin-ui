@@ -22,6 +22,8 @@ import {
     watchDetailJob,
     watchUpdateJob,
     watchDeleteJob,
+    watchListJobDoneByAccountId,
+    watchListJobDoneByFreelancerId,
 } from "./jobSagas";
 import {
     watchGetListTransaction,
@@ -60,6 +62,8 @@ export default function* rootSaga() {
         watchDetailJob(),
         watchUpdateJob(),
         watchDeleteJob(),
+        watchListJobDoneByAccountId(),
+        watchListJobDoneByFreelancerId(),
 
         // transaction
         watchGetListTransaction(),

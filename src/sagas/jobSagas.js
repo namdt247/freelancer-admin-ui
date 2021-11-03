@@ -103,3 +103,43 @@ function* deleteJob({params}) {
 export function* watchDeleteJob() {
     yield takeEvery(jobActionType.DELETE_JOB, deleteJob);
 }
+
+function* listJobDoneByAccountId({params}) {
+    let response = yield API.requestGetAPI(APIConfig.URL_LIST_JOB_DONE_BY_ACCOUNT_ID, params);
+    if (response && parseInt(response.status) === APICode.SUCCESS) {
+        yield put({
+            type: jobActionType.LIST_JOB_DONE_BY_ACCOUNT_ID_SUCCESS,
+            data: response.data,
+            status: response.status,
+        });
+    } else {
+        yield put({
+            type: jobActionType.LIST_JOB_DONE_BY_ACCOUNT_ID_FAILED,
+            message: response ? response.message : '',
+        });
+    }
+}
+
+export function* watchListJobDoneByAccountId() {
+    yield takeEvery(jobActionType.LIST_JOB_DONE_BY_ACCOUNT_ID, listJobDoneByAccountId);
+}
+
+function* listJobDoneByFreelancerId({params}) {
+    let response = yield API.requestGetAPI(APIConfig.URL_LIST_JOB_DONE_BY_FREELANCER_ID, params);
+    if (response && parseInt(response.status) === APICode.SUCCESS) {
+        yield put({
+            type: jobActionType.LIST_JOB_DONE_BY_FREELANCER_ID_SUCCESS,
+            data: response.data,
+            status: response.status,
+        });
+    } else {
+        yield put({
+            type: jobActionType.LIST_JOB_DONE_BY_FREELANCER_ID_FAILED,
+            message: response ? response.message : '',
+        });
+    }
+}
+
+export function* watchListJobDoneByFreelancerId() {
+    yield takeEvery(jobActionType.LIST_JOB_DONE_BY_FREELANCER_ID, listJobDoneByFreelancerId);
+}

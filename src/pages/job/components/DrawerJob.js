@@ -4,12 +4,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {jobAction} from "../../../actions";
 import {jobActionType} from "../../../actions/actionTypes";
 import LoadingData from "../../../components/LoadingData";
+import DrawerInfoAccount from "./DrawerInfoAccount";
 
 function DrawerJob(props) {
     const dispatch = useDispatch();
 
     const jobReducer = useSelector((state) => state.jobReducer);
-    console.log(jobReducer)
 
     const {visible, setVisible, typeForm, jobId} = props;
 
@@ -25,6 +25,14 @@ function DrawerJob(props) {
     const [result, setResult] = useState('');
     const [status, setStatus] = useState(0);
 
+    const [renterId, setRenterId] = useState('');
+    const [freelancerId, setFreelancerId] = useState('');
+
+    const [typeInfo, setTypeInfo] = useState(1);
+
+    // info account
+    const [visibleInfo, setVisibleInfo] = useState(false);
+
     // loading
     const [loading, setLoading] = useState(false);
 
@@ -34,6 +42,16 @@ function DrawerJob(props) {
 
     const renderTitle = () => {
         return <h5>Job information</h5>
+    }
+
+    const handleClickRenter = () => {
+        setTypeInfo(1);
+        setVisibleInfo(true);
+    }
+
+    const handleClickFreelancer = () => {
+        setTypeInfo(2);
+        setVisibleInfo(true);
     }
 
     useEffect(() => {
@@ -56,7 +74,9 @@ function DrawerJob(props) {
             setSubject(data.subject || '');
             setSalary(data.salary || 0);
             setRenter(data.account?.username || '');
+            setRenterId(data.account?.id || '');
             setFreelancer(data.freelancer?.account?.username || '');
+            setFreelancerId(data.freelancer?.account?.id || '');
             setDescription(data.description || '');
             setRate(data.rate || '');
             setComment(data.comment || '');
@@ -106,7 +126,7 @@ function DrawerJob(props) {
                                 <span className="mr-1 font-weight-bold">
                                     Renter:
                                 </span>
-                                <span>
+                                <span className="text-primary cursor-pointer" onClick={handleClickRenter}>
                                     {renter}
                                 </span>
                             </div>
@@ -116,7 +136,7 @@ function DrawerJob(props) {
                                 <span className="mr-1 font-weight-bold">
                                     Freelancer:
                                 </span>
-                                <span>
+                                <span className="text-primary cursor-pointer" onClick={handleClickFreelancer}>
                                     {freelancer}
                                 </span>
                             </div>
@@ -197,18 +217,18 @@ function DrawerJob(props) {
                         </Col>
                     </Row>
 
-                    <Row gutter={16} className="mt-4">
-                        <Col md={24}>
-                            <div>
-                                <div className="mr-1 font-weight-bold">
-                                    Chat:
-                                </div>
-                                <div>
-                                    Chat
-                                </div>
-                            </div>
-                        </Col>
-                    </Row>
+                    {/*<Row gutter={16} className="mt-4">*/}
+                    {/*    <Col md={24}>*/}
+                    {/*        <div>*/}
+                    {/*            <div className="mr-1 font-weight-bold">*/}
+                    {/*                Chat:*/}
+                    {/*            </div>*/}
+                    {/*            <div>*/}
+                    {/*                Chat*/}
+                    {/*            </div>*/}
+                    {/*        </div>*/}
+                    {/*    </Col>*/}
+                    {/*</Row>*/}
                 </Form>
                 <div
                     style={{
@@ -227,6 +247,16 @@ function DrawerJob(props) {
                     </Button>
                 </div>
             </Drawer>
+
+            <DrawerInfoAccount
+                visible={visibleInfo}
+                setVisible={setVisibleInfo}
+                typeInfo={typeInfo}
+                jobId={jobId}
+                renterName={renter}
+                renterId={renterId}
+                freelancerId={freelancerId}
+            />
         </div>
     );
 }

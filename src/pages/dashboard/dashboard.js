@@ -12,11 +12,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {accountAction, freelancerAction, jobAction, statisticAction} from "../../actions";
 import {accountActionType, freelancerActionType, jobActionType, statisticActionType} from "../../actions/actionTypes";
 import LoadingData from "../../components/LoadingData";
-import Barchart from "./components/Barchart";
 import {Link} from "react-router-dom";
 import {Routes} from "../../common/Routes";
 import moment from "moment";
 import DateHelper from "../../common/DateHelper";
+import MLineChart from "./components/MLineChart";
 
 function Dashboard() {
     const dispatch = useDispatch();
@@ -171,9 +171,12 @@ function Dashboard() {
                                 </Link>
                             </div>
                         </div>
-                        <Barchart
+                        <MLineChart
                             statisticFinancial={statisticFinancial}
                         />
+                        {/*<Barchart*/}
+                        {/*    statisticFinancial={statisticFinancial}*/}
+                        {/*/>*/}
                     </div>
                 </Col>
                 <Col xl={4} className="pl-md-2">

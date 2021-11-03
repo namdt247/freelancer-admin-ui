@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useHistory} from 'react-router-dom';
-import logo from '../assets/images/logo.svg';
+import logo from '../assets/images/logo.png';
 import LayoutLogin from '../components/LayoutLogin';
 import {Button, Checkbox, Form, Icon, Input, message} from 'antd';
 import {useDispatch, useSelector} from "react-redux";
