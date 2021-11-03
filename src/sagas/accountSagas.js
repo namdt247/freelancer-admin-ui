@@ -85,7 +85,7 @@ export function* watchUpdateAccount() {
 }
 
 function* deleteAccount({params}) {
-    let response = yield API.requestPostAPI(APIConfig.URL_DELETE_ACCOUNT, params);
+    let response = yield API.requestGetAPI(APIConfig.URL_DELETE_ACCOUNT, params);
     if (response && parseInt(response.status) === APICode.SUCCESS) {
         yield put({
             type: accountActionType.DELETE_ACCOUNT_SUCCESS,

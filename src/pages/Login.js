@@ -51,6 +51,10 @@ function Login(props) {
                 notiMessage(400, loginReducer.message || contentMessage.MESSAGE_LOGIN_FAILED);
                 message.destroy();
                 setLoadingSubmit(false);
+            } else if (loginReducer.status === APICode.USER_LOCKED) {
+                notiMessage(400, loginReducer.message || contentMessage.MESSAGE_LOGIN_FAILED);
+                message.destroy();
+                setLoadingSubmit(false);
             } else {
                 notiMessage(400, contentMessage.MESSAGE_LOGIN_FAILED);
                 message.destroy();

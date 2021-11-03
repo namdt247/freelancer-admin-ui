@@ -85,7 +85,7 @@ export function* watchUpdateFreelancer() {
 }
 
 function* deleteFreelancer({params}) {
-    let response = yield API.requestPostAPI(APIConfig.URL_DELETE_FREELANCER, params);
+    let response = yield API.requestGetAPI(APIConfig.URL_DELETE_FREELANCER, params);
     if (response && parseInt(response.status) === APICode.SUCCESS) {
         yield put({
             type: freelancerActionType.DELETE_FREELANCER_SUCCESS,
