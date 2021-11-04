@@ -191,9 +191,8 @@ function DrawerFreelancer(props) {
                                 <span className="mr-1 font-weight-bold">
                                     Description:
                                 </span>
-                                <span>
-                                    {description}
-                                </span>
+                                <div dangerouslySetInnerHTML={{__html: description}}>
+                                </div>
                             </div>
                         </Col>
                         <Col md={12}>

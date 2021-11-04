@@ -295,8 +295,7 @@ function DrawerJob(props) {
                                 </div>
                                 <div>
                                     <Rate allowHalf value={rate} disabled />
-                                    <div>
-                                        {comment}
+                                    <div dangerouslySetInnerHTML={{__html: comment}}>
                                     </div>
                                 </div>
                             </div>
