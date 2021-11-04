@@ -26,10 +26,10 @@ function Overview(props) {
                     <div className="d-flex justify-content-between mb-3">
                         <div>
                             <h6 className="mb-0">
-                                Condition user
+                                User statistics
                             </h6>
                             <div className="text-overview-title">
-                                Condition user of staff on the system
+                                User statistics on the system
                             </div>
                         </div>
                     </div>
@@ -79,9 +79,9 @@ function Overview(props) {
                 <div className="wrap-component-overview">
                     <div className="d-flex justify-content-between mb-3">
                         <div>
-                            <h6 className="mb-0">Freelancer</h6>
+                            <h6 className="mb-0">User</h6>
                             <div className="text-overview-title">
-                                List new freelancer
+                                List new user
                             </div>
                         </div>
                         <div>
