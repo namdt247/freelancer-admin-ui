@@ -1,4 +1,5 @@
-export const BASE_URL = 'http://localhost:8088';
+// export const BASE_URL = 'http://localhost:8088';
+export const BASE_URL = 'https://ffreelancer.herokuapp.com';
 
 export const BASE_API = `${BASE_URL}`;
 

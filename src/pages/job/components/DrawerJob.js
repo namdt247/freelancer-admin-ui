@@ -74,22 +74,8 @@ function DrawerJob(props) {
                 return (
                     <div key={item.id} className="d-flex justify-content-center">
                         <Comment
-                            author={
-                                <span
-                                    className="mb-0 text-capitalize font-weight-bold"
-                                    style={{
-                                        color: "black",
-                                        fontSize: '14px',
-                                    }}
-                                >
-                                    {item.username}
-                                </span>
-                            }
                             content={
-                                <span>{item.text}</span>
-                            }
-                            datetime={
-                                <small><i>{item.datetime ? moment(item.datetime).format(DateHelper.formatFull()) : ''}</i></small>
+                                <span>{item.text} - <small><i>{item.datetime ? moment(item.datetime).format(DateHelper.formatFull()) : ''}</i></small></span>
                             }
                             className="wrap-item-chat-2 mb-2"
                         />
