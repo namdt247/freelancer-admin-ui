@@ -1,18 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import logo from '../assets/images/logo.png';
 import LayoutLogin from '../components/LayoutLogin';
 import {Button, Checkbox, Form, Icon, Input, message} from 'antd';
 import {useDispatch, useSelector} from "react-redux";
 import {loginAction} from "../actions";
 import {loginActionType} from "../actions/actionTypes";
-import {Routes} from "../common/Routes";
 import {contentMessage, notiMessage} from "../common/Message";
 import APICode from "../common/APICode";
 
 function Login(props) {
     const dispatch = useDispatch();
-    let history = useHistory();
+    // let history = useHistory();
 
     const loginReducer = useSelector((state) => state.loginReducer);
 
@@ -44,7 +43,8 @@ function Login(props) {
     useEffect(() => {
         if (loginReducer.type === loginActionType.LOGIN_SUCCESS) {
             message.destroy();
-            history.push(Routes.Home.path);
+            window.location = '/';
+            // history.push(Routes.Home.path);
         }
         if (loginReducer.type === loginActionType.LOGIN_FAILED) {
             if (loginReducer.status === APICode.PERMISSION_DENIED) {

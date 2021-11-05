@@ -171,7 +171,7 @@ function DrawerJob(props) {
         <div>
             <Drawer
                 title={renderTitle()}
-                width={window.innerWidth > 768 ? '50%' : '100%'}
+                width={window.innerWidth > 768 ? (window.innerWidth > 1400 ? '50%' : '60%') : '100%'}
                 onClose={onClose}
                 visible={visible}
                 bodyStyle={{ marginBottom: '2.5rem' }}

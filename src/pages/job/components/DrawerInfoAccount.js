@@ -130,7 +130,7 @@ function DrawerInfoAccount(props) {
         <div>
             <Drawer
                 title={renderTitle()}
-                width={window.innerWidth > 768 ? '40%' : '100%'}
+                width={window.innerWidth > 768 ? (window.innerWidth > 1400 ? '40%' : '50%') : '100%'}
                 onClose={onClose}
                 visible={visible}
                 bodyStyle={{ marginBottom: 20 }}
@@ -155,7 +155,7 @@ function DrawerInfoAccount(props) {
                     ) : (
                         <>
                             <Row gutter={16}>
-                                <Col md={12}>
+                                <Col md={24}>
                                     <div className="mt-2 mt-md-0 d-inline-flex align-items-center">
                                         <div>
                                             {avatar ? (

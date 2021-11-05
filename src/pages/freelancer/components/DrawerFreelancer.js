@@ -112,7 +112,7 @@ function DrawerFreelancer(props) {
         <div>
             <Drawer
                 title={renderTitle()}
-                width={window.innerWidth > 768 ? '50%' : '100%'}
+                width={window.innerWidth > 768 ? (window.innerWidth > 1400 ? '50%' : '60%') : '100%'}
                 onClose={onClose}
                 visible={visible}
                 bodyStyle={{ marginBottom: 20 }}
@@ -120,7 +120,7 @@ function DrawerFreelancer(props) {
                 {(loading && typeForm === 'edit') && <LoadingData />}
                 <Form layout="vertical" hideRequiredMark>
                     <Row gutter={16}>
-                        <Col md={12}>
+                        <Col md={24}>
                             <div className="mt-2 mt-md-0 d-inline-flex align-items-center">
                                 <div>
                                     {avatar ? (
