@@ -137,7 +137,7 @@ function DrawerJob(props) {
             setRenter(data.account?.username || '');
             setRenterId(data.account?.id || '');
             setFreelancer(data.freelancer?.account?.username || '');
-            setFreelancerId(data.freelancer?.account?.id || '');
+            setFreelancerId(data.freelancer?.id || '');
             setDescription(data.description || '');
             setRate(data.rate || '');
             setComment(data.comment || '');

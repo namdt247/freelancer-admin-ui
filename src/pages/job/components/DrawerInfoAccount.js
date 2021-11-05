@@ -61,7 +61,10 @@ function DrawerInfoAccount(props) {
                         <div>
                             <Rate allowHalf value={item.rate || 0} disabled={true} />
                             <div>
-                                <i>{item.comment}</i>
+                                <i>
+                                    <div dangerouslySetInnerHTML={{__html: item.comment}}>
+                                    </div>
+                                </i>
                             </div>
                         </div>
                     </div>
@@ -223,9 +226,8 @@ function DrawerInfoAccount(props) {
                                         <span className="mr-1 font-weight-bold">
                                             Description:
                                         </span>
-                                        <span>
-                                            {description}
-                                        </span>
+                                        <div dangerouslySetInnerHTML={{__html: description}}>
+                                        </div>
                                     </div>
                                 </Col>
                                 <Col md={12}>

@@ -58,6 +58,14 @@ function StatisticFinancial() {
         }
     }
 
+    const calcTotalRevenue = (list) => {
+        let totalRevenue = 0;
+        list.forEach((item) => {
+            totalRevenue += item[1];
+        })
+        return totalRevenue;
+    }
+
     useEffect(() => {
         if (statisticReducer.type === statisticActionType.GET_STATISTIC_FINANCIAL) {
             setLoading(true);
@@ -117,10 +125,18 @@ function StatisticFinancial() {
 
                 {statisticFinancial.length > 0
                     ? (
-                        <MLineChart
-                            statisticFinancial={statisticFinancial}
-                            type={1}
-                        />
+                        <>
+                            <div>
+                                <span>
+                                    <span className="mr-1 h5 mb-0">Total revenue:</span>
+                                    <span className="text-gray h6">{calcTotalRevenue(statisticFinancial)}$</span>
+                                </span>
+                            </div>
+                            <MLineChart
+                                statisticFinancial={statisticFinancial}
+                                type={1}
+                            />
+                        </>
                     ) : (
                         <Empty
                             image={Empty.PRESENTED_IMAGE_SIMPLE}
