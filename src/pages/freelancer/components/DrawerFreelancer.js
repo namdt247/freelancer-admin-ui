@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react";
-import {Button, Col, Drawer, Form, Row, Tag, Rate, Avatar} from 'antd';
+import {Avatar, Button, Col, Drawer, Form, Rate, Row, Tag} from 'antd';
 import {useDispatch, useSelector} from "react-redux";
 import {freelancerAction, jobAction} from "../../../actions";
 import {freelancerActionType, jobActionType} from "../../../actions/actionTypes";
 import LoadingData from "../../../components/LoadingData";
 import Util from "../../../common/Util";
 import {Divider} from "antd/es";
+import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function DrawerFreelancer(props) {
     const dispatch = useDispatch();
@@ -122,9 +124,9 @@ function DrawerFreelancer(props) {
                             <div className="mt-2 mt-md-0 d-inline-flex align-items-center">
                                 <div>
                                     {avatar ? (
-                                        <Avatar size={200} src={avatar} />
+                                        <Avatar size={100} src={avatar} />
                                     ) : (
-                                        <Avatar size={200} style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>
+                                        <Avatar size={100} style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>
                                             {Util.getValueByName(fullName)}
                                         </Avatar>
                                     )}
@@ -133,8 +135,19 @@ function DrawerFreelancer(props) {
                                     <div className="text-capitalize h4 mb-1">
                                         {fullName}
                                     </div>
-                                    <div className="text-lowercase text-gray">
-                                        {gender}
+                                    <div className="font-weight-bold mb-0 text-gray">
+                                        <span className="mr-1">
+                                            <FontAwesomeIcon
+                                                icon={faMapMarkerAlt}
+                                                size={'sm'}
+                                            />
+                                        </span>
+                                        <span>
+                                            {address}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <Rate allowHalf value={rate} disabled={true} />
                                     </div>
                                 </div>
                             </div>
@@ -154,10 +167,10 @@ function DrawerFreelancer(props) {
                         <Col md={12}>
                             <div>
                                 <span className="mr-1 font-weight-bold">
-                                    Phone:
+                                    Gender:
                                 </span>
                                 <span>
-                                    {phone}
+                                    {gender}
                                 </span>
                             </div>
                         </Col>
@@ -166,10 +179,10 @@ function DrawerFreelancer(props) {
                         <Col md={12}>
                             <div className="mt-2 mt-md-0">
                                 <span className="mr-1 font-weight-bold">
-                                    Address:
+                                    Phone:
                                 </span>
                                 <span>
-                                    {address}
+                                    {phone}
                                 </span>
                             </div>
                         </Col>
@@ -201,7 +214,7 @@ function DrawerFreelancer(props) {
                                     Average income:
                                 </span>
                                 <span>
-                                    {averageIncome}
+                                    {averageIncome}$
                                 </span>
                             </div>
                         </Col>
@@ -224,7 +237,7 @@ function DrawerFreelancer(props) {
                                     Total income:
                                 </span>
                                 <span>
-                                    {totalEarning}
+                                    {totalEarning}$
                                 </span>
                             </div>
                         </Col>
@@ -243,16 +256,16 @@ function DrawerFreelancer(props) {
                                 </span>
                             </div>
                         </Col>
-                        <Col md={12}>
-                            <div className="mt-2 mt-md-0 font-weight-bold">
-                                <span className="mr-1 font-weight-bold">
-                                    Rate:
-                                </span>
-                                <span>
-                                    <Rate allowHalf value={rate} disabled={true} />
-                                </span>
-                            </div>
-                        </Col>
+                        {/*<Col md={12}>*/}
+                        {/*    <div className="mt-2 mt-md-0 font-weight-bold">*/}
+                        {/*        <span className="mr-1 font-weight-bold">*/}
+                        {/*            Rate:*/}
+                        {/*        </span>*/}
+                        {/*        <span>*/}
+                        {/*            <Rate allowHalf value={rate} disabled={true} />*/}
+                        {/*        </span>*/}
+                        {/*    </div>*/}
+                        {/*</Col>*/}
                     </Row>
                     <div className="mt-4">
                         {renderCommentJob(listJob)}

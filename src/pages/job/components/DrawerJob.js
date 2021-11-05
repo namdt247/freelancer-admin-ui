@@ -195,7 +195,7 @@ function DrawerJob(props) {
                                     Salary:
                                 </span>
                                 <span>
-                                    {salary}
+                                    {salary}$
                                 </span>
                             </div>
                         </Col>
