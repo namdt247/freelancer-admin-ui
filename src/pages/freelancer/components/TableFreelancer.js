@@ -14,8 +14,6 @@ function TableFreelancer(props) {
     } = props;
     const totalItem = parseInt(pageSize) * parseInt(totalPage);
 
-    console.log(data);
-
     const handleEdit = (value) => {
         setFreelancerId(value.id || '');
         setVisible(true);
@@ -104,8 +102,9 @@ function TableFreelancer(props) {
             title: 'Rate',
             dataIndex: 'rate',
             key: 'rate',
+            width: 180,
             render: text => (
-                <Rate allowHalf value={text} />
+                <Rate allowHalf value={text} disabled/>
             ),
         },
         {

@@ -44,7 +44,7 @@ function Login(props) {
     useEffect(() => {
         if (loginReducer.type === loginActionType.LOGIN_SUCCESS) {
             message.destroy();
-            history.push(Routes.Dashboard.path);
+            history.push(Routes.Home.path);
         }
         if (loginReducer.type === loginActionType.LOGIN_FAILED) {
             if (loginReducer.status === APICode.PERMISSION_DENIED) {

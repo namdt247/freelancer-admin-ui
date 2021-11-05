@@ -32,7 +32,7 @@ function TableTransaction(props) {
             key: 'amount',
             render: (text) => (
                 <span>
-                    {text}
+                    {text}$
                 </span>
             ),
         },
