@@ -83,7 +83,7 @@ function DrawerJob(props) {
                 )
             }
             return (
-                <div key={item.id} className={`${(item.username !== renter) ? 'd-flex justify-content-end' : ''}`}>
+                <div key={item.id} className={`${(item.username === freelancer) ? 'd-flex justify-content-end' : ''}`}>
                     <Comment
                         author={
                             <span
