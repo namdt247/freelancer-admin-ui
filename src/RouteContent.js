@@ -12,30 +12,34 @@ import ListUserNormal from "./pages/user-normal/ListUserNormal";
 import ListTransaction from "./pages/transaction/ListTransaction";
 import ListJob from "./pages/job/ListJob";
 import StatisticFinancial from "./pages/report-statistic/StatisticFinancial";
+import PublicRoute from "./route/PublicRoute";
+import PrivateRoute from "./route/PrivateRoute";
 
 export default () => (
     <Router>
         <Switch>
             <Route exact path={Routes.Home.path} component={HomePage} />
-            <Route exact path={Routes.Login.path} component={Login} />
-            <Route exact path={Routes.Dashboard.path} component={Dashboard} />
+
+            <PublicRoute exact path={Routes.Login.path} component={Login} />
+
+            <PrivateRoute exact path={Routes.Dashboard.path} component={Dashboard} />
 
             {/* account */}
-            <Route exact path={Routes.ListAccountAdmin.path} component={ListUserAdmin} />
-            <Route exact path={Routes.ListAccountNormal.path} component={ListUserNormal} />
+            <PrivateRoute exact path={Routes.ListAccountAdmin.path} component={ListUserAdmin} />
+            <PrivateRoute exact path={Routes.ListAccountNormal.path} component={ListUserNormal} />
 
             {/* freelancer */}
-            <Route exact path={Routes.ListFreelancer.path} component={ListFreelancer} />
+            <PrivateRoute exact path={Routes.ListFreelancer.path} component={ListFreelancer} />
 
             {/* job */}
-            <Route exact path={Routes.ListJob.path} component={ListJob} />
+            <PrivateRoute exact path={Routes.ListJob.path} component={ListJob} />
 
             {/* transaction */}
-            <Route exact path={Routes.ListTransaction.path} component={ListTransaction} />
+            <PrivateRoute exact path={Routes.ListTransaction.path} component={ListTransaction} />
 
             {/* report */}
-            <Route exact path={Routes.MainReport.path} component={MainReport} />
-            <Route exact path={Routes.ReportFinancial.path} component={StatisticFinancial} />
+            <PrivateRoute exact path={Routes.MainReport.path} component={MainReport} />
+            <PrivateRoute exact path={Routes.ReportFinancial.path} component={StatisticFinancial} />
 
             <Route path="*" component={NotFound} />
         </Switch>
